@@ -1,0 +1,57 @@
+
+.logo {
+    height: 35px;
+    width: 35px;
+    border-radius: 100%;
+}
+
+.logo-container {
+    height: auto;
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+    border-bottom: 1px solid white;
+}
+
+.todo-btn:hover {
+    fill: rgb(59, 144, 59);
+}
+
+.todo-btn {
+    fill: rgb(14, 180, 11);
+}
+
+.side-items {
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    list-style: none;
+
+    li {
+        width: 100%;
+        padding: 20px 0;
+
+        text-align: center;
+    }
+
+    .list-vector {
+        height: 1.25rem;
+        width: 1.25rem;
+        fill: rgba(255, 255, 255, 0.6);
+        transition: all .5s;
+    }
+
+    .list-vector:hover {
+        fill: white;
+    }
+}
+
+aside {
+    position: fixed;
+    height: 100%;
+    width: 80px;
+}
+
+nav {
+    margin-left: 80px;
+}
