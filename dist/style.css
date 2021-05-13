@@ -1,0 +1,54 @@
+.logo {
+  height: 35px;
+  width: 35px;
+  border-radius: 100%;
+}
+
+.logo-container {
+  height: auto;
+  width: 100%;
+  text-align: center;
+  padding: 10px 0;
+  border-bottom: 1px solid white;
+}
+
+.todo-btn:hover {
+  fill: #3b903b;
+}
+
+.todo-btn {
+  fill: #0eb40b;
+}
+
+.side-items {
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  list-style: none;
+}
+.side-items li {
+  width: 100%;
+  padding: 20px 0;
+  text-align: center;
+}
+.side-items .list-vector {
+  height: 1.25rem;
+  width: 1.25rem;
+  fill: rgba(255, 255, 255, 0.6);
+  transition: all 0.5s;
+}
+.side-items .list-vector:hover {
+  fill: white;
+}
+
+aside {
+  position: fixed;
+  height: 100%;
+  width: 80px;
+}
+
+nav {
+  margin-left: 80px;
+}
+
+/*# sourceMappingURL=style.css.map */
