@@ -92,4 +92,12 @@ main {
   fill: orange;
 }
 
+.checklist-item {
+  margin-left: 2em;
+}
+
+.checklist-desc {
+  margin: 0 0 0 0.5em;
+}
+
 /*# sourceMappingURL=style.css.map */
