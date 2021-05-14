@@ -30,13 +30,15 @@
   padding: 20px 0;
   text-align: center;
 }
-.side-items .list-vector {
-  height: 1.25rem;
-  width: 1.25rem;
+
+.list-vector {
+  height: 1.1rem;
+  width: 1.1rem;
   fill: rgba(255, 255, 255, 0.6);
   transition: all 0.5s;
 }
-.side-items .list-vector:hover {
+
+.list-vector:hover {
   fill: white;
 }
 
@@ -46,8 +48,16 @@ aside {
   width: 60px;
 }
 
+.side-bar-expanded {
+  width: 200px;
+}
+
 nav {
   margin-left: 60px;
+}
+
+.nav-expanded {
+  margin-left: 200px;
 }
 
 main {
@@ -55,49 +65,59 @@ main {
   padding: 2rem;
 }
 
+.main-content-expanded {
+  margin-left: 200px;
+}
+
+.inbox-icon {
+  height: 1em;
+  width: 1em;
+  fill: #3333fb;
+}
+
 .sub-project {
   font-size: 0.8rem;
 }
 
-.todo-text-container {
-  margin-left: 1rem;
-}
-
-.task-container {
-  font-size: 0.9rem;
+.todo-container {
+  font-size: 0.9em;
   padding: 0.5rem 1rem;
   border: 1px solid rgba(215, 215, 215, 0.559);
   border-radius: 5px;
 }
-
-.task-notes {
-  margin-left: 1.8rem;
+.todo-container .todo-header-container {
+  margin-left: 1rem;
 }
 
-.task-icons-container svg {
+.todo-container-expanded {
+  transition: all 0.5s;
+}
+.todo-container-expanded .todo-notes {
+  margin-left: 1.8rem;
+}
+.todo-container-expanded .checklist-item {
+  margin-left: 2em;
+}
+.todo-container-expanded .checklist-desc {
+  margin: 0 0 0 0.5em;
+}
+
+.todo-icons-container svg {
   height: 20px;
   width: 20px;
   margin-left: 2em;
 }
-.task-icons-container .task-delete {
+.todo-icons-container .todo-delete {
   fill: rgba(252, 83, 83, 0.89);
 }
-.task-icons-container .task-edit {
+.todo-icons-container .todo-edit {
   fill: rgba(252, 195, 90, 0.856);
 }
-.task-icons-container .task-delete:hover {
+.todo-icons-container .todo-delete:hover {
   fill: #ef2020;
 }
-.task-icons-container .task-edit:hover {
+.todo-icons-container .todo-edit:hover {
   fill: orange;
-}
-
-.checklist-item {
-  margin-left: 2em;
-}
-
-.checklist-desc {
-  margin: 0 0 0 0.5em;
 }
 
 /*# sourceMappingURL=style.css.map */
