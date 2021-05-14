@@ -1,16 +1,19 @@
+$side-bar-border: 1px solid rgba(255, 255, 255, 0.6);
+$white-faded: rgba(255, 255, 255, 0.6);
 
-.logo {
-    height: 35px;
-    width: 35px;
-    border-radius: 100%;
-}
 
 .logo-container {
     height: auto;
     width: 100%;
     text-align: center;
     padding: 10px 0;
-    border-bottom: 1px solid white;
+    border-bottom: $side-bar-border;
+
+    .logo {
+        height: 35px;
+        width: 35px;
+        border-radius: 100%;
+    }
 }
 
 .todo-btn:hover {
@@ -22,10 +25,10 @@
 }
 
 .side-items {
-    height: 100%;
     width: 100%;
     padding: 0;
     list-style: none;
+    border-bottom: $side-bar-border;;
 
     li {
         width: 100%;
@@ -49,9 +52,57 @@
 aside {
     position: fixed;
     height: 100%;
-    width: 80px;
+    width: 60px;
 }
 
 nav {
-    margin-left: 80px;
+    margin-left: 60px;
+}
+
+main {
+    margin-left: 60px;
+    padding: 2rem;
+}
+
+.sub-project {
+    font-size: 0.8rem;
+}
+
+.todo-text-container {
+    margin-left: 1rem
+}
+
+.task-container {
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid rgba(215, 215, 215, 0.559);
+    border-radius: 5px;
+}
+
+.task-notes {
+    margin-left: 1.8rem;
+}
+
+.task-icons-container {
+    svg {
+        height: 20px;
+        width: 20px;
+        margin-left: 2em;
+    }
+
+    .task-delete {
+        fill: rgba(252, 83, 83, 0.89);
+    }
+
+    .task-edit {
+        fill: rgba(252, 195, 90, 0.856);
+    }
+
+    .task-delete:hover {
+        fill: rgb(239, 32, 32);
+    }
+
+    .task-edit:hover {
+        fill: orange;
+    }
 }
