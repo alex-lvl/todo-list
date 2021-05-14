@@ -10,7 +10,7 @@
     <title>Todo List</title>
 </head>
 <body>
-    <aside class="navbar-dark bg-danger">
+    <aside class="navbar-dark bg-danger side-bar-expanded">
         <div class="h-100 w-100 d-flex flex-column align-items-center">
             <a class="m-0 logo-container">
                 <img src="images/todo-list-logo3.png" class="logo" alt="todo list logo">
@@ -47,10 +47,15 @@
                     </a>
                 </li>
             </ul>
+            <a href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-folder list-vector" viewBox="0 0 16 16">
+                    <path d="M.54 3.87.5 3a2 2 0 0 1 2-2h3.672a2 2 0 0 1 1.414.586l.828.828A2 2 0 0 0 9.828 3h3.982a2 2 0 0 1 1.992 2.181l-.637 7A2 2 0 0 1 13.174 14H2.826a2 2 0 0 1-1.991-1.819l-.637-7a1.99 1.99 0 0 1 .342-1.31zM2.19 4a1 1 0 0 0-.996 1.09l.637 7a1 1 0 0 0 .995.91h10.348a1 1 0 0 0 .995-.91l.637-7A1 1 0 0 0 13.81 4H2.19zm4.69-1.707A1 1 0 0 0 6.172 2H2.5a1 1 0 0 0-1 .981l.006.139C1.72 3.042 1.95 3 2.19 3h5.396l-.707-.707z"/>
+                </svg>
+            </a>
         </div>
     </aside>
 
-    <nav class="navbar navbar-expand-md navbar-light bg-light">
+    <nav class="navbar navbar-expand-md navbar-light bg-light nav-expanded">
         <div class="container-fluid">
             <a class="navbar-brand">Navbar</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -70,29 +75,32 @@
         </div>
     </nav>
 
-    <main>
-        <h1 class="">inbox</h1>
-        <p class="m-0 text-muted">greetings!</p>
-        <p class="m-0 text-muted">here are your tasks</p>
-
-        <div class="task-container mt-5">
+    <main class="main-content-expanded">
+        <h1>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-inbox-fill inbox-icon" viewBox="0 0 16 16">
+                <path d="M4.98 4a.5.5 0 0 0-.39.188L1.54 8H6a.5.5 0 0 1 .5.5 1.5 1.5 0 1 0 3 0A.5.5 0 0 1 10 8h4.46l-3.05-3.812A.5.5 0 0 0 11.02 4H4.98zm-1.17-.437A1.5 1.5 0 0 1 4.98 3h6.04a1.5 1.5 0 0 1 1.17.563l3.7 4.625a.5.5 0 0 1 .106.374l-.39 3.124A1.5 1.5 0 0 1 14.117 13H1.883a1.5 1.5 0 0 1-1.489-1.314l-.39-3.124a.5.5 0 0 1 .106-.374l3.7-4.625z"/>
+            </svg>
+            <span class="text-capitalize">inbox</span>
+        </h1>
+        <p class="m-0 text-muted text-capitalize">greetings!</p>
+        <div class="todo-container mt-5">
             <div class="d-flex">
                 <div class="d-flex">
                     <input type="checkbox" name="" class="">
                 </div>
-                <div class="todo-text-container">
-                    <p class="mb-0">borrow sarahs travel guide</p>
-                    <p class="mb-0 text-muted sub-project">vacation at rome</p>
+                <div class="todo-header-container">
+                    <p class="mb-0 todo-header">Borrow sarahs travel guide</p>
+                    <p class="mb-0 text-muted todo-project">Vacation at rome</p>
                 </div>
                 <div class="todo-date-container ms-auto">
                     <div>today</div>
                 </div>
             </div>
-            <div class="task-container-expanded">
-                <div class="task-notes">
-                    <p class="mt-2">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eaque, ipsum eveniet. Impedit distinctio sed sunt tenetur.</p>
+            <div class="todo-container-expanded">
+                <div class="todo-notes">
+                    <p class="mt-2 todo-notes-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eaque, ipsum eveniet. Impedit distinctio sed sunt tenetur.</p>
                 </div>
-                <div class="task-checklist">
+                <div class="todo-checklist">
                     <div class="checklist-item d-flex">
                         <input type="checkbox" name="" id="">
                         <p class="checklist-desc">call sarah</p>
@@ -106,12 +114,12 @@
                         <p class="checklist-desc">call sarah</p>
                     </div>
                 </div>
-                <div class="task-icons-container d-flex justify-content-end">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square task-edit" viewBox="0 0 16 16">
+                <div class="todo-icons-container d-flex justify-content-end">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square todo-edit" viewBox="0 0 16 16">
                         <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
                         <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
                     </svg>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill task-delete" viewBox="0 0 16 16">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill todo-delete" viewBox="0 0 16 16">
                         <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
                     </svg>
                 </div>
