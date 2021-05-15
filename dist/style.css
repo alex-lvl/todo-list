@@ -1,14 +1,28 @@
 .logo-container {
   height: auto;
   width: 100%;
-  text-align: center;
-  padding: 10px 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 2rem;
 }
 .logo-container .logo {
-  height: 35px;
-  width: 35px;
+  height: 1.1rem;
+  width: 1.1rem;
   border-radius: 100%;
+}
+.logo-container .logo-name {
+  text-transform: capitalize;
+  color: white;
+  margin-left: 0.9rem;
+}
+.logo-container span {
+  font-weight: bold;
+}
+
+.logo-container-expanded {
+  padding: 1rem 2rem;
+  justify-content: start;
 }
 
 .todo-btn:hover {
@@ -21,14 +35,14 @@
 
 .side-items {
   width: 100%;
-  padding: 0;
+  padding: 0 2rem;
   list-style: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.6);
   border-bottom: 1px solid rgba(255, 255, 255, 0.6);
 }
 .side-items li {
   width: 100%;
   padding: 20px 0;
-  text-align: center;
 }
 
 .list-vector {
@@ -42,10 +56,35 @@
   fill: white;
 }
 
+.side-items-expanded {
+  text-align: start;
+}
+
+.side-items-projects {
+  width: 100%;
+  padding: 0 2rem;
+  list-style: none;
+}
+
+.side-projects-expanded {
+  text-align: start;
+}
+
+.side-item-text {
+  text-transform: capitalize;
+  color: rgba(255, 255, 255, 0.6);
+  margin-left: 0.9rem;
+}
+
+a {
+  text-decoration: none;
+}
+
 aside {
   position: fixed;
   height: 100%;
   width: 60px;
+  background-color: #4723d9;
 }
 
 .side-bar-expanded {
