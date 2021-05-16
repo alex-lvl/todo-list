@@ -1,13 +1,13 @@
 $side-bar-border: 1px solid rgba(255, 255, 255, 0.6);
 $white-faded: rgba(255, 255, 255, 0.6);
+$side-link-margin: 0 1.5rem;
 
 .logo-container {
-    height: auto;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 1rem 2rem;
+    padding: 1.2rem 0;
 
     .logo {
         height: 1.1rem;
@@ -16,19 +16,13 @@ $white-faded: rgba(255, 255, 255, 0.6);
     }
 
     .logo-name {
-        text-transform: capitalize;
-        color: white;
         margin-left: 0.9rem;
+        color: white;
     }
 
     span {
         font-weight: bold;
     }
-}
-
-.logo-container-expanded {
-    padding: 1rem 2rem;
-    justify-content: start;
 }
 
 .todo-btn:hover {
@@ -41,8 +35,9 @@ $white-faded: rgba(255, 255, 255, 0.6);
 
 .side-items {
     width: 100%;
-    padding: 0 2rem;
+    padding: 0;
     list-style: none;
+    text-align: center;
     border-top:$side-bar-border;
     border-bottom: $side-bar-border;
 
@@ -55,7 +50,7 @@ $white-faded: rgba(255, 255, 255, 0.6);
 .list-vector {
     height: 1.1rem;
     width: 1.1rem;
-    fill: rgba(255, 255, 255, 0.6);
+    fill: $white-faded;
     transition: all .5s;
 }
 
@@ -63,22 +58,15 @@ $white-faded: rgba(255, 255, 255, 0.6);
     fill: white;
 }
 
-.side-items-expanded {
-    text-align: start;
-}
-
 .side-items-projects {
     width: 100%;
-    padding: 0 2rem;
+    padding: 0;
+    margin: 0;
+    text-align: center;
     list-style: none;
 }
 
-.side-projects-expanded {
-    text-align: start;
-}
-
 .side-item-text {
-    text-transform: capitalize;
     color: $white-faded;
     margin-left: 0.9rem;
 }
@@ -93,10 +81,6 @@ aside {
     width: 60px;
 
     background-color: #4723d9;
-}
-
-.side-bar-expanded {
-    width: 200px;
 }
 
 nav {
@@ -175,4 +159,25 @@ main {
     .todo-edit:hover {
         fill: orange;
     }
+}
+
+
+.side-bar-expanded {
+    width: 200px;
+    text-transform: capitalize;
+}
+
+.logo-container-expanded {
+    padding: 1rem 1.5rem;
+    justify-content: start;
+}
+
+.side-projects-expanded {
+    padding: $side-link-margin;
+    text-align: start;
+}
+
+.side-items-expanded {
+    padding: $side-link-margin;
+    text-align: start;
 }
