@@ -1,10 +1,9 @@
 .logo-container {
-  height: auto;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1rem 2rem;
+  padding: 1.2rem 0;
 }
 .logo-container .logo {
   height: 1.1rem;
@@ -12,17 +11,11 @@
   border-radius: 100%;
 }
 .logo-container .logo-name {
-  text-transform: capitalize;
-  color: white;
   margin-left: 0.9rem;
+  color: white;
 }
 .logo-container span {
   font-weight: bold;
-}
-
-.logo-container-expanded {
-  padding: 1rem 2rem;
-  justify-content: start;
 }
 
 .todo-btn:hover {
@@ -35,8 +28,9 @@
 
 .side-items {
   width: 100%;
-  padding: 0 2rem;
+  padding: 0;
   list-style: none;
+  text-align: center;
   border-top: 1px solid rgba(255, 255, 255, 0.6);
   border-bottom: 1px solid rgba(255, 255, 255, 0.6);
 }
@@ -56,22 +50,15 @@
   fill: white;
 }
 
-.side-items-expanded {
-  text-align: start;
-}
-
 .side-items-projects {
   width: 100%;
-  padding: 0 2rem;
+  padding: 0;
+  margin: 0;
+  text-align: center;
   list-style: none;
 }
 
-.side-projects-expanded {
-  text-align: start;
-}
-
 .side-item-text {
-  text-transform: capitalize;
   color: rgba(255, 255, 255, 0.6);
   margin-left: 0.9rem;
 }
@@ -85,10 +72,6 @@ aside {
   height: 100%;
   width: 60px;
   background-color: #4723d9;
-}
-
-.side-bar-expanded {
-  width: 200px;
 }
 
 nav {
@@ -157,6 +140,26 @@ main {
 }
 .todo-icons-container .todo-edit:hover {
   fill: orange;
+}
+
+.side-bar-expanded {
+  width: 200px;
+  text-transform: capitalize;
+}
+
+.logo-container-expanded {
+  padding: 1rem 1.5rem;
+  justify-content: start;
+}
+
+.side-projects-expanded {
+  padding: 0 1.5rem;
+  text-align: start;
+}
+
+.side-items-expanded {
+  padding: 0 1.5rem;
+  text-align: start;
 }
 
 /*# sourceMappingURL=style.css.map */
