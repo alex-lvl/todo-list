@@ -1,6 +1,8 @@
 $side-bar-border: 1px solid rgba(255, 255, 255, 0.6);
 $white-faded: rgba(255, 255, 255, 0.6);
-$side-link-margin: 0 1.5rem;
+$side-link-padding: 0 1.5rem;
+$main-body-margin: 15.5rem;
+$side-text-margin: 0.9rem;
 
 .logo-container {
     width: 100%;
@@ -14,15 +16,12 @@ $side-link-margin: 0 1.5rem;
         width: 1.1rem;
         border-radius: 100%;
     }
+}
 
-    .logo-name {
-        margin-left: 0.9rem;
-        color: white;
-    }
-
-    span {
-        font-weight: bold;
-    }
+.logo-name {
+    margin-left: $side-text-margin;
+    font-weight: bold;
+    color: white;
 }
 
 .todo-btn:hover {
@@ -33,7 +32,7 @@ $side-link-margin: 0 1.5rem;
     fill: rgb(14, 180, 11);
 }
 
-.side-items {
+.side-links {
     width: 100%;
     padding: 0;
     list-style: none;
@@ -48,7 +47,7 @@ $side-link-margin: 0 1.5rem;
 }
 
 .list-vector {
-    height: 1.1rem;
+    height: 1.1em;
     width: 1.1rem;
     fill: $white-faded;
     transition: all .5s;
@@ -58,17 +57,21 @@ $side-link-margin: 0 1.5rem;
     fill: white;
 }
 
-.side-items-projects {
+.side-projects {
     width: 100%;
     padding: 0;
     margin: 0;
     text-align: center;
     list-style: none;
+
+    li {
+        padding-bottom: 3px;
+    }
 }
 
-.side-item-text {
+.side-bar-text {
     color: $white-faded;
-    margin-left: 0.9rem;
+    margin-left: $side-text-margin;
 }
 
 a {
@@ -81,14 +84,11 @@ aside {
     width: 60px;
 
     background-color: #4723d9;
+    font-size: 0.95rem;
 }
 
 nav {
     margin-left: 60px;
-}
-
-.nav-expanded {
-    margin-left: 200px;
 }
 
 main {
@@ -96,14 +96,16 @@ main {
     padding: 2rem;
 }
 
-.main-content-expanded {
-    margin-left: 200px;
-}
-
 .inbox-icon {
     height: 1em;
     width: 1em;
     fill: rgb(51, 51, 251);
+}
+
+.project-icon {
+    height: 1.1rem;
+    width: 1.1rem;
+    fill: white;
 }
 
 .sub-project {
@@ -163,8 +165,16 @@ main {
 
 
 .side-bar-expanded {
-    width: 200px;
+    width: $main-body-margin;
     text-transform: capitalize;
+}
+
+.main-content-expanded {
+    margin-left: $main-body-margin;
+}
+
+.nav-expanded {
+    margin-left: $main-body-margin;
 }
 
 .logo-container-expanded {
@@ -173,11 +183,11 @@ main {
 }
 
 .side-projects-expanded {
-    padding: $side-link-margin;
+    padding: $side-link-padding;
     text-align: start;
 }
 
-.side-items-expanded {
-    padding: $side-link-margin;
+.side-links-expanded {
+    padding: $side-link-padding;
     text-align: start;
 }
