@@ -10,12 +10,11 @@
   width: 1.1rem;
   border-radius: 100%;
 }
-.logo-container .logo-name {
+
+.logo-name {
   margin-left: 0.9rem;
-  color: white;
-}
-.logo-container span {
   font-weight: bold;
+  color: white;
 }
 
 .todo-btn:hover {
@@ -26,7 +25,7 @@
   fill: #0eb40b;
 }
 
-.side-items {
+.side-links {
   width: 100%;
   padding: 0;
   list-style: none;
@@ -34,13 +33,13 @@
   border-top: 1px solid rgba(255, 255, 255, 0.6);
   border-bottom: 1px solid rgba(255, 255, 255, 0.6);
 }
-.side-items li {
+.side-links li {
   width: 100%;
   padding: 20px 0;
 }
 
 .list-vector {
-  height: 1.1rem;
+  height: 1.1em;
   width: 1.1rem;
   fill: rgba(255, 255, 255, 0.6);
   transition: all 0.5s;
@@ -50,15 +49,18 @@
   fill: white;
 }
 
-.side-items-projects {
+.side-projects {
   width: 100%;
   padding: 0;
   margin: 0;
   text-align: center;
   list-style: none;
 }
+.side-projects li {
+  padding-bottom: 3px;
+}
 
-.side-item-text {
+.side-bar-text {
   color: rgba(255, 255, 255, 0.6);
   margin-left: 0.9rem;
 }
@@ -72,14 +74,11 @@ aside {
   height: 100%;
   width: 60px;
   background-color: #4723d9;
+  font-size: 0.95rem;
 }
 
 nav {
   margin-left: 60px;
-}
-
-.nav-expanded {
-  margin-left: 200px;
 }
 
 main {
@@ -87,14 +86,16 @@ main {
   padding: 2rem;
 }
 
-.main-content-expanded {
-  margin-left: 200px;
-}
-
 .inbox-icon {
   height: 1em;
   width: 1em;
   fill: #3333fb;
+}
+
+.project-icon {
+  height: 1.1rem;
+  width: 1.1rem;
+  fill: white;
 }
 
 .sub-project {
@@ -143,8 +144,16 @@ main {
 }
 
 .side-bar-expanded {
-  width: 200px;
+  width: 15.5rem;
   text-transform: capitalize;
+}
+
+.main-content-expanded {
+  margin-left: 15.5rem;
+}
+
+.nav-expanded {
+  margin-left: 15.5rem;
 }
 
 .logo-container-expanded {
@@ -157,7 +166,7 @@ main {
   text-align: start;
 }
 
-.side-items-expanded {
+.side-links-expanded {
   padding: 0 1.5rem;
   text-align: start;
 }
