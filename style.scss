@@ -10,6 +10,9 @@ $side-text-margin: 0.9rem;
     width: 1em;
 }
 
+.hide-text {
+    display: none;
+}
 
 .logo-container {
     width: 100%;
@@ -17,7 +20,7 @@ $side-text-margin: 0.9rem;
     // justify-content: center;
     // align-items: center;
     text-align: center;
-    padding: 1.2rem 0;
+    padding: 1rem 0;
 
     .logo {
         height: 1.1rem;
@@ -41,6 +44,8 @@ $side-text-margin: 0.9rem;
 }
 
 .side-links {
+    width: 100%;
+    padding: 0;
     list-style: none;
     text-align: center;
     border-top:$side-bar-border;
@@ -62,6 +67,7 @@ $side-text-margin: 0.9rem;
 }
 
 .side-projects {
+    padding: 0;
     text-align: center;
     list-style: none;
 
@@ -86,15 +92,18 @@ aside {
 
     background-color: #4723d9;
     font-size: 0.95rem;
+    transition: all 0.5s;
 }
 
 nav {
     margin-left: $body-margin;
+    transition: all 0.5s;
 }
 
 main {
     margin-left: $body-margin;
     padding: 2em 3em;
+    transition: all 0.5s;
 }
 
 .inbox-icon {
