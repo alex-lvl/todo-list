@@ -1,27 +1,53 @@
 import 'bootstrap'
+import {expandTodo,expandSideBar} from './expand';
 
-const expandButton = document.querySelector('.navbar-brand');
-const sideBar = document.querySelector('aside');
-const logoContainer = document.querySelector('.logo-container');
-const sideBarText = document.querySelectorAll('.side-bar-text');
-const logoName = document.querySelectorAll('.logo-name');
-const mainContent = document.querySelector('main');
-const navBar = document.querySelector('nav');
-const sideLinks = document.querySelector('.side-links')
-const sideProjects = document.querySelector('.side-projects');
+const todoContent = document.querySelector('.content');
 
-expandButton.addEventListener('click', function() {
-    sideBar.classList.toggle('side-bar-expanded');
-    sideLinks.classList.toggle('side-links-expanded');
-    sideProjects.classList.toggle('side-projects-expanded');
-    logoContainer.classList.toggle('logo-container-expanded');
-    mainContent.classList.toggle('main-content-expanded');
-    navBar.classList.toggle('nav-expanded');
-    sideBarText.forEach((e) => {
-        e.classList.toggle('hide-text');
-    })
-    logoName.forEach((e) => {
-        e.classList.toggle('hide-text');
-    })
-});
+expandTodo()
+expandSideBar()
+
+class Todo {
+    constructor(title,project,date) {
+        this.title = title
+        this.project = project
+        this.date = date
+    }
+
+    createTodo() {
+        const todoContainer = document.createElement('div');
+        todoContainer.className = 'todo-container';
+
+        const todo = document.createElement('div');
+        todo.className = 'd-flex';
+
+        const todoCheckbox = document.createElement('input');
+        todoCheckbox.type = 'checkbox';
+        const todoHeaderContainer = document.createElement('div');
+        todoHeaderContainer.className = 'todo-header-container';
+
+        const todoTitle = document.createElement('p');
+        todoTitle.textContent = this.title;
+        const todoProject = document.createElement('p');
+        todoProject.className = 'text-muted';
+        todoProject.textContent = this.project;
+
+        todoHeaderContainer.appendChild(todoTitle);
+        todoHeaderContainer.appendChild(todoProject);
+
+        const date = document.createElement('time');
+        date.className = 'ms-auto'
+        date.textContent = this.date;
+
+        todo.appendChild(todoCheckbox);
+        todo.appendChild(todoHeaderContainer);
+        todo.appendChild(date);
+        todoContainer.appendChild(todo);
+        todoContent.appendChild(todoContainer);
+    }
+}
+
+const vacation =  new Todo('borrow sarahs travel guide','vacation at rome','today')
+vacation.createTodo();
+
+
 
