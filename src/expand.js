@@ -31,8 +31,9 @@ function expandSideBar() {
 
 function expandTodo() {
     todoContent.addEventListener('click', function(e) {
-        if (e.target.className == 'd-flex' || e.target.className == 'todo-container' || e.target.className == 'todo-container-expanded') {
-            expandedTodo.classList.toggle('hide-todo');
+        console.log(e.target);
+        if (e.target.className == 'todo-container') {
+            e.target.children[1].classList.toggle('hide-todo');
         }
     })
 }
