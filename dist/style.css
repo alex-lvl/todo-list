@@ -118,9 +118,6 @@ main {
   display: none;
 }
 
-.todo-container-expanded {
-  transition: all 0.5s;
-}
 .todo-container-expanded .todo-notes {
   margin-top: 8px;
   margin-left: 1.8rem;
@@ -176,6 +173,19 @@ main {
 .side-links-expanded {
   padding: 0 1.5rem;
   text-align: start;
+}
+
+.todo-form {
+  padding: 2em;
+  background-color: #4723d9;
+  color: white;
+  border-radius: 5px;
+}
+.todo-form label {
+  display: block;
+}
+.todo-form textarea[name=notes] {
+  resize: none;
 }
 
 /*# sourceMappingURL=style.css.map */
