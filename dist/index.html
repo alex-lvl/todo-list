@@ -135,7 +135,7 @@
                     <time class="ms-auto">today</time>
                 </div>
                 <div class="todo-container-expanded hide-todo">
-                    <p class="todo-notes">Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam corporis tempore rerum quidem repudiandae explicabo vero non! Repellat nemo officia mollitia voluptate earum? Perspiciatis in, officia repellendus aspernatur nam vero..</p>
+                    <p class="todo-notes">Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium, ut. Neque, laboriosam placeat, quo velit, amet libero fugit dolore quidem at vitae autem dolorem accusantium voluptate? Reiciendis, consectetur! Ab at ratione et voluptate saepe voluptatibus, reiciendis dolore quos incidunt, obcaecati ullam nulla? Provident deleniti repudiandae corporis dicta minus aut dolorem eum explicabo expedita, at est officiis voluptas eius, laboriosam autem!</p>
                     <div>
                         <div class="checklist-item d-flex">
                             <input type="checkbox" name="" id="">
@@ -162,6 +162,36 @@
                 </div>
             </div>
         </section>
+
+        <form class="todo-form">
+            <h1>New Todo</h1>
+            <section>
+                <p>
+                    <label for="title">title</label>
+                    <input class="form-control" type="text" name="title">
+                </p>
+                <p>
+                    <label for="project">select project</label>
+                    <select class="form-select form-select" name="project">
+                        <option selected>choose a project</option>
+                    </select>
+                </p>
+                <p>
+                    <label for="date">date</label>
+                    <input type="date" name="date">
+                </p>
+                <p>
+                    <label for="notes">notes</label>
+                    <textarea class="form-control" name="notes" cols="30" rows="3" maxlength="60"></textarea>
+                </p>
+                <p>
+                    <button type="button" class="btn btn-primary btn-sm">add checklist</button>
+                </p>
+                <div class="d-grid gap-2">
+                    <button class="btn btn-success" type="button">submit</button>
+                </div>
+            </section>
+        </form>
     </main>
 </body>
 </html>
