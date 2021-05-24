@@ -137,7 +137,6 @@ main {
 }
 
 .todo-container-expanded {
-    transition: all .5s;
 
     .todo-notes {
         margin-top: 8px;
@@ -205,4 +204,19 @@ main {
 .side-links-expanded {
     padding: $side-link-padding;
     text-align: start;
+}
+
+.todo-form {
+    padding: 2em;
+    background-color: #4723d9;
+    color: white;
+    border-radius: 5px;
+
+    label {
+        display: block;
+    }
+
+    textarea[name=notes] {
+        resize: none;
+    }
 }
