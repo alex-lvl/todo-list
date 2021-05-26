@@ -2,15 +2,20 @@ import 'bootstrap'
 import {expandTodo,expandSideBar} from './expand';
 
 const todoContent = document.querySelector('.content');
+const checklistBtn = document.querySelector('.checklist-btn');
+const checklistContainer = document.querySelector('.checklist-container')
+const myTodos = [];
 
 expandTodo()
 expandSideBar()
 
 class Todo {
-    constructor(title,project,date) {
+    constructor(title,project,date,note,...checklist) {
         this.title = title
         this.project = project
         this.date = date
+        this.note = note
+        this.checklist = checklist;
     }
 
     createTodo() {
@@ -44,6 +49,25 @@ class Todo {
         todoContainer.appendChild(todo);
         todoContent.appendChild(todoContainer);
     }
+}
+
+checklistBtn.addEventListener('click', () => {
+    createChecklist();
+});
+
+function createChecklist() {
+    const checklistItem = document.createElement('div');
+
+    const checklistTitle = document.createElement('label');
+    checklistTitle.textContent = 'Checklist Item';
+    const checklistInput = document.createElement('input');
+    checklistInput.className = 'form-control-sm'
+    checklistInput.type = 'text';
+    checklistInput.placeholder = 'name';
+
+    checklistItem.appendChild(checklistTitle);
+    checklistItem.appendChild(checklistInput);
+    checklistContainer.appendChild(checklistItem);
 }
 
 const vacation =  new Todo('borrow sarahs travel guide','vacation at rome','today')
