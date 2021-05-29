@@ -1,4 +1,4 @@
-.project-icon, .inbox-icon, .list-vector {
+#pencil-icon, .project-icon, .inbox-icon, .list-vector {
   height: 1em;
   width: 1em;
 }
@@ -91,14 +91,6 @@ main {
   transition: all 0.5s;
 }
 
-.inbox-icon {
-  fill: #3333fb;
-}
-
-.project-icon {
-  fill: #63e5ff;
-}
-
 .todo-container {
   font-size: 0.9em;
   padding: 0.5rem 1rem;
@@ -114,7 +106,7 @@ main {
   margin: 0;
 }
 
-.hide-todo {
+.hide-element {
   display: none;
 }
 
@@ -175,17 +167,23 @@ main {
   text-align: start;
 }
 
-.todo-form {
-  padding: 2em;
-  background-color: #4723d9;
-  color: white;
-  border-radius: 5px;
-}
 .todo-form label {
   display: block;
 }
 .todo-form textarea[name=notes] {
   resize: none;
+}
+
+.inbox-icon {
+  fill: #3333fb;
+}
+
+.project-icon {
+  fill: #63e5ff;
+}
+
+#pencil-icon {
+  fill: #f6f98e;
 }
 
 /*# sourceMappingURL=style.css.map */
