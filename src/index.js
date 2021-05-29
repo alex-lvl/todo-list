@@ -1,6 +1,8 @@
 import 'bootstrap'
 import {expandTodo,expandSideBar} from './expand';
+import {displayForm} from './form';
 
+const linkTabs = document.querySelectorAll('.link');
 const todoContent = document.querySelector('.content');
 const checklistBtn = document.querySelector('.checklist-btn');
 const checklistContainer = document.querySelector('.checklist-container')
@@ -73,5 +75,18 @@ function createChecklist() {
 const vacation =  new Todo('borrow sarahs travel guide','vacation at rome','today')
 vacation.createTodo();
 
+linkTabs.forEach((e) => {
+    e.addEventListener('click', () => {
+        removeContent();
+        switch(e) {
+            case linkTabs[0]:
+                displayForm();
+        }
+    });
+})
 
-
+function removeContent() {
+    while (todoContent.firstChild) {
+        todoContent.removeChild(todoContent.firstChild);
+      }
+}
