@@ -16,9 +16,6 @@ $side-text-margin: 0.9rem;
 
 .logo-container {
     width: 100%;
-    // display: flex;
-    // justify-content: center;
-    // align-items: center;
     text-align: center;
     padding: 1rem 0;
 
@@ -62,23 +59,41 @@ $side-text-margin: 0.9rem;
     transition: all .5s;
 }
 
-.list-vector:hover {
-    fill: white;
+.link:hover {
+    .list-vector {
+        fill: white;
+    }
+
+    span {
+        color: white;
+    }
 }
 
 .side-projects {
     padding: 0;
     text-align: center;
     list-style: none;
+    transition: all .5s;
 
     li {
         padding-bottom: 3px;
     }
 }
 
+.side-projects > li:hover {
+    .list-vector {
+        fill: white;
+    }
+
+    span {
+        color: white;
+    }
+}
+
 .side-bar-text {
     color: $white-faded;
     margin-left: $side-text-margin;
+    transition: all .5s;
 }
 
 a {
@@ -91,19 +106,19 @@ aside {
     width: $body-margin;
 
     background-color: #4723d9;
-    font-size: 0.95rem;
-    transition: all 0.5s;
+    font-size: .95rem;
+    transition: all .5s;
 }
 
 nav {
     margin-left: $body-margin;
-    transition: all 0.5s;
+    transition: all .5s;
 }
 
 main {
     margin-left: $body-margin;
     padding: 2em 3em;
-    transition: all 0.5s;
+    transition: all .5s;
 }
 
 .todo-container {
@@ -127,7 +142,6 @@ main {
 }
 
 .todo-container-expanded {
-
     .todo-notes {
         margin-top: 8px;
         margin-left: 1.8rem;
@@ -166,32 +180,21 @@ main {
     }
 }
 
-
 .side-bar-expanded {
     width: $expanded-body-margin;
     text-transform: capitalize;
 }
 
-.main-content-expanded {
-    margin-left: $expanded-body-margin;
-}
-
-.nav-expanded {
+.main-content-expanded, .nav-expanded {
     margin-left: $expanded-body-margin;
 }
 
 .logo-container-expanded {
     padding: 1rem 1.5rem;
-    // justify-content: start;
     text-align: start;
 }
 
-.side-projects-expanded {
-    padding: $side-link-padding;
-    text-align: start;
-}
-
-.side-links-expanded {
+.side-projects-expanded, .side-links-expanded {
     padding: $side-link-padding;
     text-align: start;
 }
@@ -219,4 +222,9 @@ main {
 #pencil-icon {
     @extend %icon-size;
     fill: rgb(246, 249, 142);
+}
+
+.calender-icon {
+    @extend %icon-size;
+    fill: rgb(252, 67, 30);
 }
