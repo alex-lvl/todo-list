@@ -1,4 +1,4 @@
-#pencil-icon, .project-icon, .inbox-icon, .list-vector {
+.calender-icon, #pencil-icon, .project-icon, .inbox-icon, .list-vector {
   height: 1em;
   width: 1em;
 }
@@ -49,22 +49,34 @@
   transition: all 0.5s;
 }
 
-.list-vector:hover {
+.link:hover .list-vector {
   fill: white;
+}
+.link:hover span {
+  color: white;
 }
 
 .side-projects {
   padding: 0;
   text-align: center;
   list-style: none;
+  transition: all 0.5s;
 }
 .side-projects li {
   padding-bottom: 3px;
 }
 
+.side-projects > li:hover .list-vector {
+  fill: white;
+}
+.side-projects > li:hover span {
+  color: white;
+}
+
 .side-bar-text {
   color: rgba(255, 255, 255, 0.6);
   margin-left: 0.9rem;
+  transition: all 0.5s;
 }
 
 a {
@@ -144,11 +156,7 @@ main {
   text-transform: capitalize;
 }
 
-.main-content-expanded {
-  margin-left: 15.5rem;
-}
-
-.nav-expanded {
+.main-content-expanded, .nav-expanded {
   margin-left: 15.5rem;
 }
 
@@ -157,12 +165,7 @@ main {
   text-align: start;
 }
 
-.side-projects-expanded {
-  padding: 0 1.5rem;
-  text-align: start;
-}
-
-.side-links-expanded {
+.side-projects-expanded, .side-links-expanded {
   padding: 0 1.5rem;
   text-align: start;
 }
@@ -184,6 +187,10 @@ main {
 
 #pencil-icon {
   fill: #f6f98e;
+}
+
+.calender-icon {
+  fill: #fc431e;
 }
 
 /*# sourceMappingURL=style.css.map */
