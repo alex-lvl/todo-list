@@ -2,6 +2,8 @@ import 'bootstrap'
 import {expandTodo,expandSideBar} from './expand';
 import {displayForm} from './form';
 import {displayInbox} from './inbox'
+import {displayPresentTodos} from './today'
+import {displayWeekTodos} from './week'
 
 const linkTabs = document.querySelectorAll('.link');
 const todoContent = document.querySelector('.content');
@@ -64,6 +66,12 @@ linkTabs.forEach((e) => {
                 break;
             case linkTabs[1]:
                 displayInbox();
+                break;
+            case linkTabs[2]:
+                displayPresentTodos();
+                break;
+            case linkTabs[3]:
+                displayWeekTodos();
                 break;
         }
     });
