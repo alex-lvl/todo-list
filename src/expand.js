@@ -3,7 +3,7 @@ export {expandSideBar, expandTodo}
 const expandButton = document.querySelector('.navbar-brand');
 const sideBar = document.querySelector('aside');
 const logoContainer = document.querySelector('.logo-container');
-const sideBarText = document.querySelectorAll('.side-bar-text');
+const sideBarText = document.querySelectorAll('.link-text');
 const logoName = document.querySelectorAll('.logo-name');
 const mainContent = document.querySelector('main');
 const navBar = document.querySelector('nav');
