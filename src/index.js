@@ -82,15 +82,16 @@ linkTabs.forEach((e) => {
 
 projectTabs.addEventListener('click', e => {
     let project = e.target.closest('li')
+    console.log(project);
     switch(project) {
         case projectFormTab:
             displayProjectForm();
             break;
     }
-})
-
-projectFormTab.addEventListener('click', e => {
-    console.log(e);
+    
+    if(e.target.classList.contains('cancel-project-icon')) {
+        console.log('deleted project form');
+    }
 })
 
 function removeContent() {
