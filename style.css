@@ -1,4 +1,4 @@
-.calender-icon, #pencil-icon, .project-icon, .inbox-icon, .list-vector {
+.cancel-project-icon, .calender-icon, #pencil-icon, .project-icon, .inbox-icon, .list-vector {
   height: 1em;
   width: 1em;
 }
@@ -42,6 +42,7 @@
 }
 .side-links li {
   padding: 20px 0;
+  cursor: pointer;
 }
 
 .list-vector {
@@ -64,6 +65,7 @@
 }
 .side-projects li {
   padding-bottom: 3px;
+  cursor: pointer;
 }
 
 .side-projects > li:hover .list-vector {
@@ -73,7 +75,7 @@
   color: white;
 }
 
-.side-bar-text {
+.link-text {
   color: rgba(255, 255, 255, 0.6);
   margin-left: 0.9rem;
   transition: all 0.5s;
@@ -191,6 +193,22 @@ main {
 
 .calender-icon {
   fill: #fc431e;
+}
+
+.cancel-project-icon {
+  fill: rgba(239, 48, 48, 0.8);
+  transition: all 0.5s;
+}
+
+.cancel-project-icon:hover {
+  fill: #fe4040;
+}
+
+.project-form {
+  width: 150px;
+  margin-left: 1.1rem;
+  border: none;
+  padding: 0 1px;
 }
 
 /*# sourceMappingURL=style.css.map */

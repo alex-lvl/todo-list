@@ -50,6 +50,7 @@ $side-text-margin: 0.9rem;
 
     li {
         padding: 20px 0;
+        cursor: pointer
     }
 }
 
@@ -77,6 +78,7 @@ $side-text-margin: 0.9rem;
 
     li {
         padding-bottom: 3px;
+        cursor: pointer;
     }
 }
 
@@ -90,7 +92,7 @@ $side-text-margin: 0.9rem;
     }
 }
 
-.side-bar-text {
+.link-text {
     color: $white-faded;
     margin-left: $side-text-margin;
     transition: all .5s;
@@ -227,4 +229,21 @@ main {
 .calender-icon {
     @extend %icon-size;
     fill: rgb(252, 67, 30);
+}
+
+.cancel-project-icon {
+    @extend %icon-size;
+    fill: rgba(239, 48, 48, 0.8);
+    transition: all .5s;
+}
+
+.cancel-project-icon:hover {
+    fill: rgb(254, 64, 64);
+}
+
+.project-form {
+    width: 150px;
+    margin-left: 1.1rem;
+    border: none;
+    padding: 0 1px;
 }
