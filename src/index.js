@@ -4,9 +4,12 @@ import {displayForm} from './form';
 import {displayInbox} from './inbox'
 import {displayPresentTodos} from './today'
 import {displayWeekTodos} from './week'
+import {displayProjectForm} from './projects'
 
 const linkTabs = document.querySelectorAll('.link');
+const projectTabs = document.querySelector('.side-projects');
 const todoContent = document.querySelector('.content');
+const projectFormTab = document.querySelector('.new-project-tab');
 const myTodos = [];
 
 expandTodo()
@@ -75,6 +78,19 @@ linkTabs.forEach((e) => {
                 break;
         }
     });
+})
+
+projectTabs.addEventListener('click', e => {
+    let project = e.target.closest('li')
+    switch(project) {
+        case projectFormTab:
+            displayProjectForm();
+            break;
+    }
+})
+
+projectFormTab.addEventListener('click', e => {
+    console.log(e);
 })
 
 function removeContent() {
