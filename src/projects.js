@@ -23,4 +23,10 @@ function createProjectForm() {
     li.appendChild(titleInput);
 
     projectsList.appendChild(li);
+
+    titleInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            console.log('submitted');
+        }
+    });
 }
