@@ -1,4 +1,5 @@
 export {displayForm};
+import {submitTodo} from './index'
 
 const formHeader = document.querySelector('header');
 const content = document.querySelector('.content');
@@ -87,6 +88,14 @@ function createFormElements() {
     submitBtn.textContent = 'submit';
     submitBtnContainer.appendChild(submitBtn);
 
+    submitBtn.addEventListener('click', () => {
+        const checklistInputs = document.querySelectorAll('.checklist-input');
+        let checklist = [];
+        checklistInputs.forEach(e => {
+            checklist.push(e.value);
+        });
+        submitTodo(titleInput.value,projectOption.text,dateInput.value,notesInput.value,checklist);
+    });
 
     todoForm.appendChild(titleInputContainer);
     todoForm.appendChild(projectMenuContainer);
@@ -99,17 +108,17 @@ function createFormElements() {
     content.appendChild(todoForm);
 }
 
-function createChecklist(checklist) {
+function createChecklist(container) {
     const checklistItem = document.createElement('div');
 
     const checklistTitle = document.createElement('label');
     checklistTitle.textContent = 'Checklist Item';
     const checklistInput = document.createElement('input');
-    checklistInput.className = 'form-control-sm'
+    checklistInput.className = 'form-group checklist-input'
     checklistInput.type = 'text';
     checklistInput.placeholder = 'name';
 
     checklistItem.appendChild(checklistTitle);
     checklistItem.appendChild(checklistInput);
-    checklist.appendChild(checklistItem);
+    container.appendChild(checklistItem);
 }
