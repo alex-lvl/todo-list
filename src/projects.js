@@ -8,8 +8,9 @@ function displayProjectForm() {
 }
 
 class Project {
-    constructor(title) {
+    constructor(title,todos) {
         this.title = title;
+        this.todos = todos;
     }
 
     createProject(container) {
