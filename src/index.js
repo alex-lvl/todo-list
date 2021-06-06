@@ -5,6 +5,7 @@ import {displayInbox} from './inbox'
 import {displayPresentTodos} from './today'
 import {displayWeekTodos} from './week'
 import {displayProjectForm} from './projects'
+export {submitTodo}
 
 const linkTabs = document.querySelectorAll('.link');
 const projectTabs = document.querySelector('.side-projects');
@@ -16,7 +17,7 @@ expandTodo()
 expandSideBar()
 
 class Todo {
-    constructor(title,project,date,note,...checklist) {
+    constructor(title,project,date,note,checklist) {
         this.title = title
         this.project = project
         this.date = date
@@ -57,6 +58,13 @@ class Todo {
     }
 }
 
+function submitTodo(title,project,date,notes,checklist) {
+    const todo = new Todo(title,project,date,notes,checklist);
+    todo.createTodo()
+    myTodos.push(todo);
+    console.log(todo);
+}
+
 const vacation =  new Todo('borrow sarahs travel guide','vacation at rome','today')
 vacation.createTodo();
 
@@ -83,6 +91,7 @@ linkTabs.forEach((e) => {
 projectTabs.addEventListener('click', e => {
     let project = e.target.closest('li')
     console.log(project);
+    
     switch(project) {
         case projectFormTab:
             displayProjectForm();
@@ -91,6 +100,7 @@ projectTabs.addEventListener('click', e => {
     
     if(e.target.classList.contains('cancel-project-icon')) {
         console.log('deleted project form');
+        e.target.parentElement.remove();
     }
 })
 
