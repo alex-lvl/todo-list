@@ -1,5 +1,5 @@
 export {displayForm};
-import {submitTodo} from './index'
+import {submitTodo,newChecklistItem} from './index'
 
 const formHeader = document.querySelector('header');
 const content = document.querySelector('.content');
@@ -92,7 +92,8 @@ function createFormElements() {
         const checklistInputs = document.querySelectorAll('.checklist-input');
         let checklist = [];
         checklistInputs.forEach(e => {
-            checklist.push(e.value);
+            let item = newChecklistItem(e.value,false)
+            checklist.push(item);
         });
         submitTodo(titleInput.value,projectOption.text,dateInput.value,notesInput.value,checklist);
     });
