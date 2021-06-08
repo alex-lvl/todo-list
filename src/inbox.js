@@ -1,9 +1,11 @@
 export {displayInbox} 
+import {myTodos} from './index'
 
 const inboxHeader = document.querySelector('header');
 
 function displayInbox() {
     updateInboxHeader();
+    appendTodos();
 }
 
 function updateInboxHeader() {
@@ -18,5 +20,7 @@ function updateInboxHeader() {
 }
 
 function appendTodos() {
-
+    myTodos.forEach((e) => {
+        e.createTodo();
+    });
 }
