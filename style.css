@@ -57,13 +57,15 @@
   color: white;
 }
 
-.side-projects {
+.side-projects,
+.side-projects-header {
   padding: 0;
   text-align: center;
   list-style: none;
   transition: all 0.5s;
 }
-.side-projects li {
+.side-projects li,
+.side-projects-header li {
   padding-bottom: 3px;
   cursor: pointer;
 }
@@ -196,12 +198,12 @@ main {
 }
 
 .cancel-project-icon {
-  fill: rgba(239, 48, 48, 0.8);
+  fill: rgba(255, 0, 0, 0.6);
   transition: all 0.5s;
 }
 
 .cancel-project-icon:hover {
-  fill: #fe4040;
+  fill: red;
 }
 
 .project-form {
