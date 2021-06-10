@@ -4,18 +4,19 @@ import {displayForm} from './form';
 import {displayInbox} from './inbox'
 import {displayPresentTodos} from './today'
 import {displayWeekTodos} from './week'
-import {displayProjectForm} from './projects'
+import {activateProjectTabListeners} from './projects'
 export {submitTodo,newChecklistItem}
 
 const linkTabs = document.querySelectorAll('.link');
-const projectTabs = document.querySelector('.side-projects');
 const todoContent = document.querySelector('.content');
-const projectFormTab = document.querySelector('.new-project-tab');
 const myTodos = [];
 export {myTodos}
 
-expandTodo()
-expandSideBar()
+(function activateEventListeners() {
+    expandTodo();
+    expandSideBar();
+    activateProjectTabListeners();
+})();
 
 class Todo {
     constructor(title,project,date,note,checklist,isDone) {
@@ -148,22 +149,6 @@ linkTabs.forEach((e) => {
                 break;
         }
     });
-})
-
-projectTabs.addEventListener('click', e => {
-    let project = e.target.closest('li')
-    console.log(project);
-    
-    switch(project) {
-        case projectFormTab:
-            displayProjectForm();
-            break;
-    }
-    
-    if(e.target.classList.contains('cancel-project-icon')) {
-        console.log('deleted project form');
-        e.target.parentElement.remove();
-    }
 })
 
 function removeContent() {
