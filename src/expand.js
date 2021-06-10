@@ -8,16 +8,18 @@ const mainContent = document.querySelector('main');
 const navBar = document.querySelector('nav');
 const sideLinks = document.querySelector('.side-links');
 const sideProjects = document.querySelector('.side-projects');
+const sideProjectsHeader= document.querySelector('.side-projects-header');
 const todoContent = document.querySelector('.content')
 const expandedTodo = document.querySelector('.todo-container-expanded');
 
 function expandSideBar() {
     expandButton.addEventListener('click', function() {
         const sideBarText = document.querySelectorAll('.link-text');
-
+        
         sideBar.classList.toggle('side-bar-expanded');
         sideLinks.classList.toggle('side-links-expanded');
         sideProjects.classList.toggle('side-projects-expanded');
+        sideProjectsHeader.classList.toggle('side-projects-expanded');
         logoContainer.classList.toggle('logo-container-expanded');
         mainContent.classList.toggle('main-content-expanded');
         navBar.classList.toggle('nav-expanded');
