@@ -69,6 +69,7 @@ function createFormElements() {
     notesContainer.appendChild(notesInput);
 
     const checklistContainer = document.createElement('div');
+    checklistContainer.className = 'row row-cols-lg-3 row-cols-md-2 row-cols-sm-12';
 
     const checklistBtnContainer = document.createElement('p');
     const checklistBtn = document.createElement('button');
@@ -77,7 +78,7 @@ function createFormElements() {
     checklistBtn.innerText = 'add checklist';
     checklistBtnContainer.appendChild(checklistBtn);
     checklistBtn.addEventListener('click', () => {
-        createChecklist(checklistContainer);
+        createChecklistInput(checklistContainer);
     });
 
     const submitBtnContainer = document.createElement('div');
@@ -93,7 +94,7 @@ function createFormElements() {
         let checklist = [];
         checklistInputs.forEach(e => {
             let item = newChecklistItem(e.value,false)
-            checklist.push(item);
+            return checklist.push(item);
         });
         submitTodo(titleInput.value,projectOption.text,dateInput.value,notesInput.value,checklist);
     });
@@ -109,8 +110,9 @@ function createFormElements() {
     content.appendChild(todoForm);
 }
 
-function createChecklist(container) {
+function createChecklistInput(container) {
     const checklistItem = document.createElement('div');
+    checklistItem.className = 'mb-2'
 
     const checklistTitle = document.createElement('label');
     checklistTitle.textContent = 'Checklist Item';
