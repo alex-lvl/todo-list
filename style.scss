@@ -4,6 +4,7 @@ $side-link-padding: 0 1.5rem;
 $expanded-body-margin: 15.5rem;
 $body-margin: 60px;
 $side-text-margin: 0.9rem;
+$purple-color: #4723d9;
 
 %icon-size {
     height: 1em;
@@ -108,7 +109,7 @@ aside {
     height: 100%;
     width: $body-margin;
 
-    background-color: #4723d9;
+    background-color: $purple-color;
     font-size: .95rem;
     transition: all .5s;
 }
@@ -247,4 +248,14 @@ main {
     margin-left: 1.1rem;
     border: none;
     padding: 0 1px;
+}
+
+#btn-expand {
+    @extend %icon-size;
+    fill: rgba(0, 0, 0, 0.675);
+    transition: all .5s;
+}
+
+#btn-expand:hover {
+    fill: black;
 }
