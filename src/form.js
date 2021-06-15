@@ -70,6 +70,12 @@ function createFormElements() {
 
     const checklistContainer = document.createElement('div');
     checklistContainer.className = 'row row-cols-lg-3 row-cols-md-2 row-cols-sm-12';
+    checklistContainer.addEventListener('click', (e) => {
+        const deleteIcon = e.target.closest('svg');
+        if(deleteIcon) {
+            deleteIcon.parentElement.parentElement.remove();
+        }
+    });
 
     const checklistBtnContainer = document.createElement('p');
     const checklistBtn = document.createElement('button');
@@ -115,11 +121,15 @@ function createChecklistInput(container) {
     checklistItem.className = 'mb-2'
 
     const checklistTitle = document.createElement('label');
-    checklistTitle.textContent = 'Checklist Item';
+    checklistTitle.innerHTML = `
+    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-x-lg cancel-project-icon" viewBox="0 0 16 16">
+        <path d="M1.293 1.293a1 1 0 0 1 1.414 0L8 6.586l5.293-5.293a1 1 0 1 1 1.414 1.414L9.414 8l5.293 5.293a1 1 0 0 1-1.414 1.414L8 9.414l-5.293 5.293a1 1 0 0 1-1.414-1.414L6.586 8 1.293 2.707a1 1 0 0 1 0-1.414z"/>
+    </svg>`
+    
     const checklistInput = document.createElement('input');
     checklistInput.className = 'form-group checklist-input'
     checklistInput.type = 'text';
-    checklistInput.placeholder = 'name';
+    checklistInput.placeholder = 'checklist';
 
     checklistItem.appendChild(checklistTitle);
     checklistItem.appendChild(checklistInput);
