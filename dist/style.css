@@ -1,4 +1,4 @@
-.cancel-project-icon, .calender-icon, #pencil-icon, .project-icon, .inbox-icon, .list-vector {
+#btn-expand, .cancel-project-icon, .calender-icon, #pencil-icon, .project-icon, .inbox-icon, .list-vector {
   height: 1em;
   width: 1em;
 }
@@ -211,6 +211,15 @@ main {
   margin-left: 1.1rem;
   border: none;
   padding: 0 1px;
+}
+
+#btn-expand {
+  fill: rgba(0, 0, 0, 0.675);
+  transition: all 0.5s;
+}
+
+#btn-expand:hover {
+  fill: black;
 }
 
 /*# sourceMappingURL=style.css.map */
