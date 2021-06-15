@@ -5,6 +5,7 @@ const projectFormTab = document.querySelector('.side-projects-header');
 const projectTabs = document.querySelector('.side-projects')
 const todoContent = document.querySelector('.content');
 const myProjects = [];
+export {myProjects};
 
 function activateProjectTabListeners() {
     projectFormTab.addEventListener('click', () => {
@@ -45,6 +46,12 @@ class Project {
         projectTitle.textContent = this.title;
 
         container.appendChild(projectTitle);
+    }
+
+    createProjectOption(selectMenu) {
+        const option = document.createElement('option');
+        option.textContent = this.title;
+        selectMenu.appendChild(option);
     }
 }
 
