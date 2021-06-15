@@ -1,5 +1,6 @@
 export {displayForm};
 import {submitTodo,newChecklistItem} from './index'
+import {myProjects} from './projects'
 
 const formHeader = document.querySelector('header');
 const content = document.querySelector('.content');
@@ -39,11 +40,16 @@ function createFormElements() {
     const projectMenu = document.createElement('select');
     const projectOption =document.createElement('option');
     projectLabel.innerText = 'select a project';
-    projectOption.selected = true;
-    projectOption.textContent = 'choose a project';
     projectMenu.className = 'form-select';
     projectMenu.name = 'project';
+
+    projectOption.selected = true;
+    projectOption.textContent = 'no project selected';
     projectMenu.appendChild(projectOption)
+    myProjects.forEach(e => {
+        e.createProjectOption(projectMenu);
+    });
+
     projectMenuContainer.appendChild(projectLabel);
     projectMenuContainer.appendChild(projectMenu);
 
@@ -102,7 +108,7 @@ function createFormElements() {
             let item = newChecklistItem(e.value,false)
             return checklist.push(item);
         });
-        submitTodo(titleInput.value,projectOption.text,dateInput.value,notesInput.value,checklist);
+        submitTodo(titleInput.value,projectMenu.value,dateInput.value,notesInput.value,checklist);
     });
 
     todoForm.appendChild(titleInputContainer);
