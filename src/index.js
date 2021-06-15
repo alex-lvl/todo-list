@@ -75,7 +75,7 @@ class Todo {
 
         const checklistContainer = document.createElement('div');
         this.checklist.forEach(e => {
-            e.createChecklistItem(checklistContainer,e.name);
+            e.createChecklistItem(checklistContainer);
         });
 
         const iconsContainer = document.createElement('div');
@@ -102,16 +102,17 @@ class Checklist  {
         this.isDone = isDone;
     }
 
-    createChecklistItem(container,title) {
+    createChecklistItem(container) {
         const checklistItem = document.createElement('div');
         checklistItem.className = 'checklist-item d-flex'
 
         const checklistInput = document.createElement('input');
         checklistInput.type = 'checkbox';
+        checklistInput.checked = this.isDone;
 
         const checklistTitle = document.createElement('p');
         checklistTitle.className = 'checklist-desc';
-        checklistTitle.textContent = title;
+        checklistTitle.textContent = this.title;
 
         checklistItem.appendChild(checklistInput);
         checklistItem.appendChild(checklistTitle);
