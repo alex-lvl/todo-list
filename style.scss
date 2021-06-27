@@ -61,7 +61,8 @@ $purple-color: #4723d9;
     transition: all .5s;
 }
 
-.link:hover {
+.link:hover,
+.side-projects-form-tab:hover {
     .list-vector {
         fill: white;
     }
@@ -72,7 +73,8 @@ $purple-color: #4723d9;
 }
 
 .side-projects,
-.side-projects-header {
+.side-projects-header,
+.side-projects-form-tab {
     padding: 0;
     text-align: center;
     list-style: none;
@@ -189,7 +191,8 @@ main {
     text-transform: capitalize;
 }
 
-.main-content-expanded, .nav-expanded {
+.main-content-expanded, 
+.nav-expanded {
     margin-left: $expanded-body-margin;
 }
 
@@ -198,7 +201,8 @@ main {
     text-align: start;
 }
 
-.side-projects-expanded, .side-links-expanded {
+.side-projects-expanded, 
+.side-links-expanded {
     padding: $side-link-padding;
     text-align: start;
 }
@@ -206,6 +210,7 @@ main {
 .todo-form {
     label {
         display: block;
+        text-transform: capitalize;
     }
 
     textarea[name=notes] {
