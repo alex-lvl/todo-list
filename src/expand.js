@@ -1,4 +1,5 @@
 export {expandSideBar, expandTodo}
+import {myProjects} from './projects'
 
 const expandButton = document.querySelector('.navbar-brand');
 const sideBar = document.querySelector('aside');
@@ -7,8 +8,9 @@ const logoName = document.querySelectorAll('.logo-name');
 const mainContent = document.querySelector('main');
 const navBar = document.querySelector('nav');
 const sideLinks = document.querySelector('.side-links');
-const sideProjects = document.querySelector('.side-projects');
+const projectTabs = document.querySelector('.side-projects');
 const sideProjectsHeader= document.querySelector('.side-projects-header');
+const newProjectBtn = document.querySelector('.side-projects-form-tab');
 const todoContent = document.querySelector('.content')
 
 function expandSideBar() {
@@ -17,8 +19,9 @@ function expandSideBar() {
         
         sideBar.classList.toggle('side-bar-expanded');
         sideLinks.classList.toggle('side-links-expanded');
-        sideProjects.classList.toggle('side-projects-expanded');
+        projectTabs.classList.toggle('side-projects-expanded');
         sideProjectsHeader.classList.toggle('side-projects-expanded');
+        newProjectBtn.classList.toggle('side-projects-expanded')
         logoContainer.classList.toggle('logo-container-expanded');
         mainContent.classList.toggle('main-content-expanded');
         navBar.classList.toggle('nav-expanded');
@@ -40,6 +43,7 @@ function expandSideBar() {
                 <path fill-rule="evenodd" d="M6 8a.5.5 0 0 0 .5.5h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L12.293 7.5H6.5A.5.5 0 0 0 6 8zm-2.5 7a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5z"/>
             </svg> `;
         }
+        removeExistingProjectForms();
     });
 }
 
@@ -50,3 +54,21 @@ function expandTodo() {
         }
     });
 };
+
+function removeExistingProjectForms() {
+    //remove the input form
+    let isSideBarExpanded = sideBar.classList.contains('side-bar-expanded');
+    let existingProjectForms = [...projectTabs.children];
+
+    if(!isSideBarExpanded) {
+        for(let i = 0; i < existingProjectForms.length; i++) {
+            if(!existingProjectForms[i].classList.contains('project')) {
+                existingProjectForms[i].remove()
+                console.log(myProjects);
+            }
+        }
+        
+    }
+
+    //remove from array
+}
