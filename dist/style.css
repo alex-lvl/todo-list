@@ -1,4 +1,4 @@
-#btn-expand, .cancel-project-icon, .calender-icon, #pencil-icon, .project-icon, .inbox-icon, .list-vector {
+#btn-expand, .cancel-project-icon, .calender-icon, #pencil-icon, .project-icon, .new-project-icon, .inbox-icon, .list-vector {
   height: 1em;
   width: 1em;
 }
@@ -50,22 +50,26 @@
   transition: all 0.5s;
 }
 
-.link:hover .list-vector {
+.link:hover .list-vector,
+.side-projects-form-tab:hover .list-vector {
   fill: white;
 }
-.link:hover span {
+.link:hover span,
+.side-projects-form-tab:hover span {
   color: white;
 }
 
 .side-projects,
-.side-projects-header {
+.side-projects-header,
+.side-projects-form-tab {
   padding: 0;
   text-align: center;
   list-style: none;
   transition: all 0.5s;
 }
 .side-projects li,
-.side-projects-header li {
+.side-projects-header li,
+.side-projects-form-tab li {
   padding-bottom: 3px;
   cursor: pointer;
 }
@@ -160,7 +164,8 @@ main {
   text-transform: capitalize;
 }
 
-.main-content-expanded, .nav-expanded {
+.main-content-expanded,
+.nav-expanded {
   margin-left: 15.5rem;
 }
 
@@ -169,13 +174,15 @@ main {
   text-align: start;
 }
 
-.side-projects-expanded, .side-links-expanded {
+.side-projects-expanded,
+.side-links-expanded {
   padding: 0 1.5rem;
   text-align: start;
 }
 
 .todo-form label {
   display: block;
+  text-transform: capitalize;
 }
 .todo-form textarea[name=notes] {
   resize: none;
