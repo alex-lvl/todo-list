@@ -1,7 +1,8 @@
 export {activateProjectTabListeners}
 
+const sideBar = document.querySelector('aside');
 const projectHeader = document.querySelector('header');
-const projectFormTab = document.querySelector('.side-projects-header');
+const projectFormTab = document.querySelector('.side-projects-form-tab');
 const projectTabs = document.querySelector('.side-projects')
 const todoContent = document.querySelector('.content');
 const myProjects = [];
@@ -9,7 +10,9 @@ export {myProjects};
 
 function activateProjectTabListeners() {
     projectFormTab.addEventListener('click', () => {
-        createProjectForm();
+        if(sideBar.classList.contains('side-bar-expanded')) {
+            createProjectForm();
+        }
     });
     
     projectTabs.addEventListener('click', e => {
@@ -65,6 +68,7 @@ function createProjectForm() {
     titleInput.className = 'project-form';
     titleInput.maxLength = 19;
     titleInput.type = 'text';
+    titleInput.placeholder = 'name'
     titleInput.name = 'title';
 
     li.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-x-circle cancel-project-icon" viewBox="0 0 16 16">
