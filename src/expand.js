@@ -56,19 +56,17 @@ function expandTodo() {
 };
 
 function removeExistingProjectForms() {
-    //remove the input form
     let isSideBarExpanded = sideBar.classList.contains('side-bar-expanded');
-    let existingProjectForms = [...projectTabs.children];
+    let projectList = [...projectTabs.children];
 
     if(!isSideBarExpanded) {
-        for(let i = 0; i < existingProjectForms.length; i++) {
-            if(!existingProjectForms[i].classList.contains('project')) {
-                existingProjectForms[i].remove()
+        for(let i = 0; i < myProjects.length; i++) {
+            if(!projectList[i].classList.contains('project')) {
+                projectList[i].remove()
+                myProjects.splice(i,1);
                 console.log(myProjects);
-            }
+            } 
+            projectList = [...projectTabs.children];
         }
-        
     }
-
-    //remove from array
 }
