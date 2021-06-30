@@ -108,7 +108,7 @@ function createFormElements() {
             let item = newChecklistItem(e.value,false)
             return checklist.push(item);
         });
-        submitTodo(titleInput.value,projectMenu.value,dateInput.value,notesInput.value,checklist);
+        submitTodo(titleInput.value,projectMenu.value,dateInput.value,notesInput.value,checklist,false);
     });
 
     todoForm.appendChild(titleInputContainer);

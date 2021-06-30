@@ -4,11 +4,12 @@ import {displayForm} from './form';
 import {displayInbox} from './inbox'
 import {displayPresentTodos} from './today'
 import {displayWeekTodos} from './week'
-import {activateProjectTabListeners} from './projects'
+import {activateProjectTabListeners, myProjects} from './projects'
 export {submitTodo,newChecklistItem}
 
 const linkTabs = document.querySelectorAll('.link');
 const todoContent = document.querySelector('.content');
+const todos = document.querySelectorAll('.todo-container')
 const myTodos = [];
 export {myTodos}
 
@@ -25,6 +26,7 @@ class Todo {
         this.date = date
         this.note = note
         this.checklist = checklist
+        this.isDone = isDone
     }
 
     addToArray(arr) {
@@ -34,12 +36,15 @@ class Todo {
     createTodo() {
         const todoContainer = document.createElement('div');
         todoContainer.className = 'todo-container';
+        todoContainer.setAttribute('data-index', myTodos.indexOf(this));
 
         const todo = document.createElement('div');
         todo.className = 'd-flex';
 
         const todoCheckbox = document.createElement('input');
         todoCheckbox.type = 'checkbox';
+        todoCheckbox.name = 'todoCheckBox';
+        todoCheckbox.checked = this.isDone;
         const todoHeaderContainer = document.createElement('div');
         todoHeaderContainer.className = 'todo-header-container';
 
@@ -126,8 +131,8 @@ function newChecklistItem(title,isDone) {
     return item
 }
 
-function submitTodo(title,project,date,notes,checklist) {
-    const todo = new Todo(title,project,date,notes,checklist);
+function submitTodo(title,project,date,notes,checklist,isDone) {
+    const todo = new Todo(title,project,date,notes,checklist,isDone);
     todo.addToArray(myTodos);
     console.log(myTodos);
 }
@@ -157,3 +162,31 @@ function removeContent() {
         todoContent.removeChild(todoContent.firstChild);
       }
 }
+
+todoContent.addEventListener('click', (e) => {
+    let todoIndex = e.target.parentNode.parentNode.dataset.index;
+    let deleteBtn = e.target.closest('.todo-delete')
+
+    if(e.target.name === 'todoCheckBox' && e.target.checked === false) {
+        console.log(todoIndex);
+        myTodos[todoIndex].isDone = false;
+    } else if(e.target.name === 'todoCheckBox' && e.target.checked === true) {
+        console.log(todoIndex);
+        myTodos[todoIndex].isDone = true;
+    }
+
+    if(deleteBtn) {
+        deleteBtn.parentElement.parentElement.parentElement.remove();
+        myTodos.splice(deleteBtn.parentNode.parentNode.parentNode.dataset.index,1);
+        updateIndex();
+        console.log(myTodos);
+        console.log('deleted todos');
+    }
+});
+
+function updateIndex() {
+    for(let i = 0; i < myTodos.length; i++) {
+        todoContent.children[i].dataset.index = i;
+    }
+}
+
