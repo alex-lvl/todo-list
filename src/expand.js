@@ -49,8 +49,13 @@ function expandSideBar() {
 
 function expandTodo() {
     todoContent.addEventListener('click', function(e) {
-        if (e.target.className == 'todo-container') {
-            e.target.children[1].classList.toggle('hide-element');
+        let todoContainer = e.target.closest('.todo-container');
+        if(
+            e.target.classList.contains('todo-container') 
+            || e.target.classList.contains('d-flex') 
+            || e.target.classList.contains('todo-container-expanded')
+        ) {
+            todoContainer.children[1].classList.toggle('hide-element');
         }
     });
 };
