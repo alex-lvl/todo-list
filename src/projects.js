@@ -1,4 +1,5 @@
 export {activateProjectTabListeners}
+import { myTodos } from "./index";
 
 const sideBar = document.querySelector('aside');
 const projectHeader = document.querySelector('header');
@@ -28,8 +29,10 @@ function activateProjectTabListeners() {
         } else if (project) {
             removeContent();
             updateProjectHeader(index);
+            findProjectTodo(myProjects[index]);
         }
     });
+    addDefaultProjects();
 }
 
 class Project {
@@ -59,7 +62,7 @@ class Project {
 }
 
 function createProjectForm() {
-    const project = new Project(undefined,undefined)
+    const project = new Project(undefined,undefined);
     myProjects.push(project);
     
     const li = document.createElement('li')
@@ -104,4 +107,37 @@ function removeContent() {
     while (todoContent.firstChild) {
         todoContent.removeChild(todoContent.firstChild);
       }
+}
+
+function addDefaultProjects() {
+    let projectTodos = [];
+    let workTodos = [];
+
+    let personalContainer = document.createElement('li');
+    personalContainer.className = 'project';
+
+    let workContainer = document.createElement('li');
+    workContainer.className = 'project';
+
+    let personalProject = new Project('personal',projectTodos);
+    let workProject = new Project('work',workTodos);
+
+    personalProject.createProject(personalContainer);
+    workProject.createProject(workContainer);
+
+    projectTabs.appendChild(personalContainer);
+    projectTabs.appendChild(workContainer);
+
+    myProjects.push(personalProject);
+    myProjects.push(workProject);
+    console.log(myProjects);
+}
+
+
+function findProjectTodo(project) {
+    for(let todo of myTodos) {
+        if (project.title === todo.project) {
+            todo.createTodo();
+        }
+    }
 }
