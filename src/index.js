@@ -4,12 +4,11 @@ import {displayForm} from './form';
 import {displayInbox} from './inbox'
 import {displayPresentTodos} from './today'
 import {displayWeekTodos} from './week'
-import {activateProjectTabListeners, myProjects} from './projects'
+import {activateProjectTabListeners} from './projects'
 export {submitTodo,newChecklistItem}
 
 const linkTabs = document.querySelectorAll('.link');
 const todoContent = document.querySelector('.content');
-const todos = document.querySelectorAll('.todo-container')
 const myTodos = [];
 export {myTodos}
 
@@ -162,31 +161,3 @@ function removeContent() {
         todoContent.removeChild(todoContent.firstChild);
       }
 }
-
-todoContent.addEventListener('click', (e) => {
-    let todoIndex = e.target.parentNode.parentNode.dataset.index;
-    let deleteBtn = e.target.closest('.todo-delete')
-
-    if(e.target.name === 'todoCheckBox' && e.target.checked === false) {
-        console.log(todoIndex);
-        myTodos[todoIndex].isDone = false;
-    } else if(e.target.name === 'todoCheckBox' && e.target.checked === true) {
-        console.log(todoIndex);
-        myTodos[todoIndex].isDone = true;
-    }
-
-    if(deleteBtn) {
-        deleteBtn.parentElement.parentElement.parentElement.remove();
-        myTodos.splice(deleteBtn.parentNode.parentNode.parentNode.dataset.index,1);
-        updateIndex();
-        console.log(myTodos);
-        console.log('deleted todos');
-    }
-});
-
-function updateIndex() {
-    for(let i = 0; i < myTodos.length; i++) {
-        todoContent.children[i].dataset.index = i;
-    }
-}
-

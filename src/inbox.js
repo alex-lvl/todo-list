@@ -2,6 +2,7 @@ export {displayInbox}
 import {myTodos} from './index'
 
 const inboxHeader = document.querySelector('header');
+const todoContent = document.querySelector('.content');
 
 function displayInbox() {
     updateInboxHeader();
@@ -23,4 +24,34 @@ function appendTodos() {
     myTodos.forEach((e) => {
         e.createTodo();
     });
+}
+
+todoContent.addEventListener('click', (e) => {
+    let todoIndex = e.target.parentNode.parentNode.dataset.index;
+    let deleteBtn = e.target.closest('.todo-delete');
+    let editBtn = e.target.closest('.todo-edit');
+
+    if(e.target.name === 'todoCheckBox' && e.target.checked === false) {
+        myTodos[todoIndex].isDone = false;
+    } else if(e.target.name === 'todoCheckBox' && e.target.checked === true) {
+        myTodos[todoIndex].isDone = true;
+    }
+
+    if(deleteBtn) {
+        deleteBtn.parentElement.parentElement.parentElement.remove();
+        console.log(deleteBtn.parentNode.parentNode.parentNode.dataset.index);
+        myTodos.splice(deleteBtn.parentNode.parentNode.parentNode.dataset.index,1);
+        updateIndex();
+        console.log(myTodos);
+        console.log('deleted todos');
+    } else if (editBtn) {
+        console.log('edit');
+    }
+});
+
+//bug - index doesnt properly update when deleted from a project interface
+function updateIndex() {
+    for(let i = 0; i < myTodos.length; i++) {
+        todoContent.children[i].dataset.index = i;
+    }
 }
