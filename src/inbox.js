@@ -38,20 +38,12 @@ todoContent.addEventListener('click', (e) => {
     }
 
     if(deleteBtn) {
+        let index = myTodos.findIndex(element => element.id === parseInt(deleteBtn.parentNode.parentNode.parentNode.dataset.index));
         deleteBtn.parentElement.parentElement.parentElement.remove();
-        console.log(deleteBtn.parentNode.parentNode.parentNode.dataset.index);
-        myTodos.splice(deleteBtn.parentNode.parentNode.parentNode.dataset.index,1);
-        updateIndex();
+        myTodos.splice(index,1);
         console.log(myTodos);
         console.log('deleted todos');
     } else if (editBtn) {
         console.log('edit');
     }
 });
-
-//bug - index doesnt properly update when deleted from a project interface
-function updateIndex() {
-    for(let i = 0; i < myTodos.length; i++) {
-        todoContent.children[i].dataset.index = i;
-    }
-}
