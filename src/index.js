@@ -19,13 +19,24 @@ export {myTodos}
 })();
 
 class Todo {
-    constructor(title,project,date,note,checklist,isDone) {
+    constructor(title,project,date,note,checklist,isDone,id) {
         this.title = title
         this.project = project
         this.date = date
         this.note = note
         this.checklist = checklist
         this.isDone = isDone
+        this.id = id
+    }
+
+    static idCount = 0;
+
+    static incrementIdCount() {
+        this.idCount += 1;
+    }
+
+    static idNum() {
+        return this.idCount;
     }
 
     addToArray(arr) {
@@ -35,7 +46,7 @@ class Todo {
     createTodo() {
         const todoContainer = document.createElement('div');
         todoContainer.className = 'todo-container';
-        todoContainer.setAttribute('data-index', myTodos.indexOf(this));
+        todoContainer.setAttribute('data-index', this.id);
 
         const todo = document.createElement('div');
         todo.className = 'd-flex';
@@ -131,8 +142,9 @@ function newChecklistItem(title,isDone) {
 }
 
 function submitTodo(title,project,date,notes,checklist,isDone) {
-    const todo = new Todo(title,project,date,notes,checklist,isDone);
+    const todo = new Todo(title,project,date,notes,checklist,isDone,Todo.idNum());
     todo.addToArray(myTodos);
+    Todo.incrementIdCount();
     console.log(myTodos);
 }
 
@@ -161,3 +173,14 @@ function removeContent() {
         todoContent.removeChild(todoContent.firstChild);
       }
 }
+
+(function defaultTodos() {
+    let checklist = [
+        new Checklist('eat',false),
+        new Checklist('code',false),
+        new Checklist('sleep',false),
+    ]
+    myTodos.push(new Todo('learn to code','personal','2021-07-10','lorem ipsum',checklist,false,Todo.idNum()));
+    myTodos[0].createTodo();
+    Todo.incrementIdCount();
+})();
