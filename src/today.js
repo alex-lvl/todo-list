@@ -1,9 +1,11 @@
 export {displayPresentTodos} 
+import {myTodos} from './index'
 
 const todayHeader = document.querySelector('header');
 
 function displayPresentTodos() {
     updateTodayHeader();
+    appendTodaysTodos();
 }
 
 function updateTodayHeader() {
@@ -15,4 +17,12 @@ function updateTodayHeader() {
     </svg>
     <span class="text-capitalize">Today</span>
     </h1>`;
+}
+
+function appendTodaysTodos() {
+    myTodos.forEach((e) => {
+        if(e.isToday()) {
+            e.createTodo();
+        }
+    });
 }
