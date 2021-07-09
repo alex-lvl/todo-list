@@ -19,16 +19,6 @@ export {myTodos}
 })();
 
 class Todo {
-    constructor(title,project,date,note,checklist,isDone,id) {
-        this.title = title
-        this.project = project
-        this.date = date
-        this.note = note
-        this.checklist = checklist
-        this.isDone = isDone
-        this.id = id
-    }
-
     static idCount = 0;
 
     static incrementIdCount() {
@@ -37,6 +27,15 @@ class Todo {
 
     static idNum() {
         return this.idCount;
+    }
+    constructor(title,project,date,note,checklist,isDone,id) {
+        this.title = title
+        this.project = project
+        this.date = date
+        this.note = note
+        this.checklist = checklist
+        this.isDone = isDone
+        this.id = id
     }
 
     addToArray(arr) {
@@ -108,6 +107,15 @@ class Todo {
         expandedTodoContainer.appendChild(checklistContainer);
         expandedTodoContainer.appendChild(iconsContainer);
         return expandedTodoContainer;
+    }
+
+    isToday() {
+        const today = new Date()
+        //this code converts the dash (-) mark into forward slash (/) to fix date format
+        let date = new Date(this.date.replace(/-/g, '\/'));
+        return date.getDate() === today.getDate() &&
+               date.getMonth() === today.getMonth() &&
+               date.getFullYear() === today.getFullYear();
     }
 }
 
