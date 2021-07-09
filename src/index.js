@@ -5,6 +5,7 @@ import {displayInbox} from './inbox'
 import {displayPresentTodos} from './today'
 import {displayWeekTodos} from './week'
 import {activateProjectTabListeners} from './projects'
+import { getDay,isThisWeek } from 'date-fns'
 export {submitTodo,newChecklistItem}
 
 const linkTabs = document.querySelectorAll('.link');
@@ -109,13 +110,20 @@ class Todo {
         return expandedTodoContainer;
     }
 
-    isToday() {
-        const today = new Date()
+    isTodoToday() {
+        const today = new Date();
         //this code converts the dash (-) mark into forward slash (/) to fix date format
         let date = new Date(this.date.replace(/-/g, '\/'));
         return date.getDate() === today.getDate() &&
                date.getMonth() === today.getMonth() &&
                date.getFullYear() === today.getFullYear();
+    }
+
+    isTodoThisWeek() {
+        const today = new Date();
+        let date = new Date(this.date.replace(/-/g, '\/'));
+        let dayIndex = getDay(today);
+        return isThisWeek(date, { weekStartsOn : dayIndex });
     }
 }
 
