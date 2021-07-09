@@ -1,9 +1,11 @@
 export {displayWeekTodos} 
+import {myTodos} from './index'
 
 const weekHeader = document.querySelector('header');
 
 function displayWeekTodos() {
     updateWeekHeader();
+    appendWeeklyTodos();
 }
 
 function updateWeekHeader() {
@@ -15,4 +17,12 @@ function updateWeekHeader() {
     </svg>
     <span class="text-capitalize">This Week</span>
     </h1>`;
+}
+
+function appendWeeklyTodos() {
+    myTodos.forEach((e) => {
+        if(e.isTodoThisWeek()) {
+            e.createTodo();
+        }
+    });
 }
