@@ -133,7 +133,6 @@ function addDefaultProjects() {
     console.log(myProjects);
 }
 
-
 function findProjectTodo(project) {
     for(let todo of myTodos) {
         if (project.title === todo.project) {

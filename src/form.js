@@ -38,7 +38,7 @@ function createFormElements() {
     const projectMenuContainer = document.createElement('p');
     const projectLabel = document.createElement('label');
     const projectMenu = document.createElement('select');
-    const projectOption =document.createElement('option');
+    const projectOption = document.createElement('option');
     projectLabel.innerText = 'select a project';
     projectMenu.className = 'form-select';
     projectMenu.name = 'project';

@@ -21,7 +21,7 @@ function updateTodayHeader() {
 
 function appendTodaysTodos() {
     myTodos.forEach((e) => {
-        if(e.isToday()) {
+        if(e.isTodoToday()) {
             e.createTodo();
         }
     });
