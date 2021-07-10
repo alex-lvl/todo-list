@@ -1,14 +1,15 @@
 import 'bootstrap'
 import {expandTodo,expandSideBar} from './expand';
-import {displayForm} from './form';
+import {displayForm,createFormElements,createChecklistInput} from './form';
 import {displayInbox} from './inbox'
 import {displayPresentTodos} from './today'
 import {displayWeekTodos} from './week'
 import {activateProjectTabListeners} from './projects'
 import { getDay,isThisWeek } from 'date-fns'
-export {submitTodo,newChecklistItem}
+export {submitTodo,submitEdit,newChecklistItem}
 
 const linkTabs = document.querySelectorAll('.link');
+const header = document.querySelector('header');
 const todoContent = document.querySelector('.content');
 const myTodos = [];
 export {myTodos}
@@ -59,16 +60,17 @@ class Todo {
         todoHeaderContainer.className = 'todo-header-container';
 
         const todoTitle = document.createElement('p');
+        todoTitle.className = 'todo-title'
         todoTitle.textContent = this.title;
         const todoProject = document.createElement('p');
-        todoProject.className = 'text-muted';
+        todoProject.className = 'todo-project text-muted';
         todoProject.textContent = this.project;
 
         todoHeaderContainer.appendChild(todoTitle);
         todoHeaderContainer.appendChild(todoProject);
 
         const date = document.createElement('time');
-        date.className = 'ms-auto'
+        date.className = 'todo-date ms-auto'
         date.dateTime = this.date;
         date.textContent = this.date;
 
@@ -125,6 +127,29 @@ class Todo {
         let dayIndex = getDay(today);
         return isThisWeek(date, { weekStartsOn : dayIndex });
     }
+
+    editTodo() {
+        removeContent();
+        header.innerHTML = `
+        <h1>
+            <svg xmlns="http://www.w3.org/2000/svg" height=1em width=1em class="bi bi-pencil-square todo-edit" viewBox="0 0 16 16" fill="rgba(252, 195, 90, 0.856)">
+                <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+            </svg>
+            <span class="text-capitalize">edit todo</span>
+        </h1>`;
+        let form = createFormElements(true,this.id);
+        form.titleInput.value = this.title;
+        Array.from(form.projectMenu.children).forEach(option => {
+            option.value === this.project ? option.selected = true : undefined;
+        });
+        form.dateInput.value = this.date;
+        form.notesInput.value = this.note;
+        this.checklist.forEach((e) => {
+            let input = createChecklistInput(form.checklistContainer);
+            input.checklistInput.value = e.title;
+        });
+    }
 }
 
 class Checklist  {
@@ -142,12 +167,11 @@ class Checklist  {
         checklistInput.checked = this.isDone;
 
         const checklistTitle = document.createElement('p');
-        checklistTitle.className = 'checklist-desc';
+        checklistTitle.className = 'checklist-title';
         checklistTitle.textContent = this.title;
 
         checklistItem.appendChild(checklistInput);
         checklistItem.appendChild(checklistTitle);
-
         container.appendChild(checklistItem);
     }
 }
@@ -161,6 +185,16 @@ function submitTodo(title,project,date,notes,checklist,isDone) {
     const todo = new Todo(title,project,date,notes,checklist,isDone,Todo.idNum());
     todo.addToArray(myTodos);
     Todo.incrementIdCount();
+    console.log(myTodos);
+}
+
+function submitEdit(title,project,date,note,checklist,index) {
+    let existingTodo = myTodos[index]
+    existingTodo.title = title;
+    existingTodo.project = project;
+    existingTodo.date = date;
+    existingTodo.note = note;
+    existingTodo.checklist = checklist;
     console.log(myTodos);
 }
 
@@ -197,6 +231,6 @@ function removeContent() {
         new Checklist('sleep',false),
     ]
     myTodos.push(new Todo('learn to code','personal','2021-07-10','lorem ipsum',checklist,false,Todo.idNum()));
-    myTodos[0].createTodo();
+    myTodos[Todo.idNum()].createTodo();
     Todo.incrementIdCount();
 })();

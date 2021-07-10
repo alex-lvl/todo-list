@@ -1,5 +1,5 @@
-export {displayForm};
-import {submitTodo,newChecklistItem} from './index'
+export {displayForm,createFormElements,createChecklistInput};
+import {submitTodo,newChecklistItem, submitEdit} from './index'
 import {myProjects} from './projects'
 
 const formHeader = document.querySelector('header');
@@ -20,7 +20,7 @@ function updateHeader() {
     </h1>`;
 }
 
-function createFormElements() {
+function createFormElements(isEditing,index) {
     const todoForm = document.createElement('form');
     todoForm.className = 'todo-form'
 
@@ -44,7 +44,7 @@ function createFormElements() {
     projectMenu.name = 'project';
 
     projectOption.selected = true;
-    projectOption.textContent = 'no project selected';
+    projectOption.textContent = '';
     projectMenu.appendChild(projectOption)
     myProjects.forEach(e => {
         e.createProjectOption(projectMenu);
@@ -70,7 +70,6 @@ function createFormElements() {
     notesInput.name = 'notes';
     notesInput.cols = 30;
     notesInput.rows = 3;
-    notesInput.maxLength = 60;
     notesContainer.appendChild(notesLabel);
     notesContainer.appendChild(notesInput);
 
@@ -102,13 +101,11 @@ function createFormElements() {
     submitBtnContainer.appendChild(submitBtn);
 
     submitBtn.addEventListener('click', () => {
-        const checklistInputs = document.querySelectorAll('.checklist-input');
-        let checklist = [];
-        checklistInputs.forEach(e => {
-            let item = newChecklistItem(e.value,false)
-            return checklist.push(item);
-        });
-        submitTodo(titleInput.value,projectMenu.value,dateInput.value,notesInput.value,checklist,false);
+        if(isEditing) {
+            submitEdit(titleInput.value,projectMenu.value,dateInput.value,notesInput.value,submitChecklist(),index)
+        } else {
+            submitTodo(titleInput.value,projectMenu.value,dateInput.value,notesInput.value,submitChecklist(),false);
+        }
     });
 
     todoForm.appendChild(titleInputContainer);
@@ -118,8 +115,9 @@ function createFormElements() {
     todoForm.appendChild(checklistContainer);
     todoForm.appendChild(checklistBtnContainer);
     todoForm.appendChild(submitBtnContainer);
-
     content.appendChild(todoForm);
+
+    return {titleInput,projectMenu,dateInput,notesInput,checklistContainer}
 }
 
 function createChecklistInput(container) {
@@ -140,4 +138,17 @@ function createChecklistInput(container) {
     checklistItem.appendChild(checklistTitle);
     checklistItem.appendChild(checklistInput);
     container.appendChild(checklistItem);
+
+    return {checklistInput}
 }
+
+function submitChecklist() {
+    const checklistInputs = document.querySelectorAll('.checklist-input');
+    let checklist = [];
+    checklistInputs.forEach(e => {
+        let item = newChecklistItem(e.value,false)
+        return checklist.push(item);
+    });
+    return checklist;
+}
+ 

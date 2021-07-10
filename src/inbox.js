@@ -44,6 +44,7 @@ todoContent.addEventListener('click', (e) => {
         console.log(myTodos);
         console.log('deleted todos');
     } else if (editBtn) {
-        console.log('edit');
+        let index = myTodos.findIndex(element => element.id === parseInt(editBtn.parentNode.parentNode.parentNode.dataset.index));
+        myTodos[index].editTodo();
     }
 });
