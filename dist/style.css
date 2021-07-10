@@ -142,7 +142,7 @@ main {
 .todo-container-expanded .checklist-item {
   margin-left: 2em;
 }
-.todo-container-expanded .checklist-desc {
+.todo-container-expanded .checklist-title {
   margin: 0 0 0 0.5em;
 }
 
