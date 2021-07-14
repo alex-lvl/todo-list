@@ -15,8 +15,13 @@ $purple-color: #4723d9;
     display: none;
 }
 
+.navbar-toggler {
+    display: none;
+}
+
 .logo-container {
     width: 100%;
+    justify-content: center;
     text-align: center;
     padding: 1rem 0;
 
@@ -44,13 +49,14 @@ $purple-color: #4723d9;
 .side-links {
     width: 100%;
     padding: 0;
+    margin: 0;
     list-style: none;
     text-align: center;
     border-top:$side-bar-border;
     border-bottom: $side-bar-border;
 
     li {
-        padding: 20px 0;
+        padding: 16px 0;
         cursor: pointer
     }
 }
@@ -73,9 +79,9 @@ $purple-color: #4723d9;
 }
 
 .side-projects,
-.side-projects-header,
-.side-projects-form-tab {
+.side-projects-header {
     padding: 0;
+    margin: 0;
     text-align: center;
     list-style: none;
     transition: all .5s;
@@ -107,7 +113,7 @@ a {
 }
 
 aside {
-    position: fixed;
+    position: absolute;
     height: 100%;
     width: $body-margin;
 
@@ -204,6 +210,7 @@ main {
 .logo-container-expanded {
     padding: 1rem 1.5rem;
     text-align: start;
+    justify-content: space-between;
 }
 
 .side-projects-expanded, 
@@ -268,4 +275,33 @@ main {
 
 #btn-expand:hover {
     fill: black;
+}
+
+@media (max-width: 767.98px) {
+    aside,
+    .side-bar-expanded {
+        position: sticky;
+        width: 100% !important; 
+        text-align: start;
+    }
+    
+    .navbar-toggler {
+        display: block;
+    }
+
+    .side-links {
+        li {
+            padding: 5px 0;
+        }
+    }
+
+    .navbar {
+        display: none;
+    }
+
+    .main-content-expanded, 
+    .nav-expanded,
+    main {
+        margin: 0 !important;
+    }
 }
