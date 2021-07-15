@@ -1,5 +1,5 @@
 export {activateProjectTabListeners}
-import { myTodos } from "./index";
+import { myTodos, removeContent } from "./index";
 
 const sideBar = document.querySelector('aside');
 const projectHeader = document.querySelector('header');
@@ -32,7 +32,6 @@ function activateProjectTabListeners() {
             findProjectTodo(myProjects[index]);
         }
     });
-    addDefaultProjects();
 }
 
 class Project {
@@ -52,6 +51,23 @@ class Project {
         projectTitle.textContent = this.title;
 
         container.appendChild(projectTitle);
+    }
+
+    createProjectElements() {
+        const li = document.createElement('li')
+        li.className = 'project';
+        li.innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-circle list-vector" viewBox="0 0 16 16">
+            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+        </svg> `;
+
+        const projectTitle = document.createElement('span');
+        projectTitle.className = 'link-text';
+        projectTitle.textContent = this.title;
+    
+        li.appendChild(projectTitle);
+    
+        projectTabs.appendChild(li);
     }
 
     createProjectOption(selectMenu) {
@@ -87,6 +103,7 @@ function createProjectForm() {
             project.title = titleInput.value;
             project.createProject(li);
             li.className = 'project';
+            storeProjects();
             console.log('submitted');
             console.log(myProjects);
         }
@@ -103,35 +120,21 @@ function updateProjectHeader(i) {
     </h1>`;
 }
 
-function removeContent() {
-    while (todoContent.firstChild) {
-        todoContent.removeChild(todoContent.firstChild);
-      }
-}
+// (function addDefaultProjects() {
+//     let personalTodos = [];
+//     let workTodos = [];
 
-function addDefaultProjects() {
-    let projectTodos = [];
-    let workTodos = [];
+//     let personalProject = new Project('personal',personalTodos);
+//     let workProject = new Project('work',workTodos);
 
-    let personalContainer = document.createElement('li');
-    personalContainer.className = 'project';
+//     personalProject.createProjectElements();
+//     workProject.createProjectElements();
 
-    let workContainer = document.createElement('li');
-    workContainer.className = 'project';
-
-    let personalProject = new Project('personal',projectTodos);
-    let workProject = new Project('work',workTodos);
-
-    personalProject.createProject(personalContainer);
-    workProject.createProject(workContainer);
-
-    projectTabs.appendChild(personalContainer);
-    projectTabs.appendChild(workContainer);
-
-    myProjects.push(personalProject);
-    myProjects.push(workProject);
-    console.log(myProjects);
-}
+//     myProjects.push(personalProject);
+//     myProjects.push(workProject);
+//     storeProjects();
+//     console.log(myProjects);
+// })();
 
 function findProjectTodo(project) {
     for(let todo of myTodos) {
@@ -139,4 +142,26 @@ function findProjectTodo(project) {
             todo.createTodo();
         }
     }
+}
+
+function storeProjects() {
+    localStorage.setItem('myProjects', JSON.stringify(myProjects));
+}
+
+function getProjectData() {
+    let storedProjects = localStorage.getItem('myProjects');
+    let parsedProjects = JSON.parse(storedProjects);
+
+    for (let project of parsedProjects) {
+        let storedProject = new Project(project.title,project.todos);
+        //we push locally stored projects back to the array because project elements lose prototype when parsed
+        storedProject.createProjectElements();
+        myProjects.push(storedProject);
+    }    
+}
+
+if(!localStorage.getItem('myProjects')) {
+    storeProjects()
+} else {
+    getProjectData();
 }

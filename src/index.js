@@ -11,8 +11,8 @@ export {submitTodo,submitEdit,newChecklistItem}
 const linkTabs = document.querySelectorAll('.link');
 const header = document.querySelector('header');
 const todoContent = document.querySelector('.content');
-const myTodos = [];
-export {myTodos}
+let myTodos = [];
+export {myTodos,removeContent}
 
 (function activateEventListeners() {
     expandTodo();
@@ -185,6 +185,7 @@ function submitTodo(title,project,date,notes,checklist,isDone) {
     const todo = new Todo(title,project,date,notes,checklist,isDone,Todo.idNum());
     todo.addToArray(myTodos);
     Todo.incrementIdCount();
+    storeTodos();
     console.log(myTodos);
 }
 
@@ -195,6 +196,7 @@ function submitEdit(title,project,date,note,checklist,index) {
     existingTodo.date = date;
     existingTodo.note = note;
     existingTodo.checklist = checklist;
+    storeTodos();
     console.log(myTodos);
 }
 
@@ -218,19 +220,77 @@ linkTabs.forEach((e) => {
     });
 })
 
+todoContent.addEventListener('click', (e) => {
+    let todoIndex = parseInt(e.target.parentNode.parentNode.dataset.index);
+    let deleteBtn = e.target.closest('.todo-delete');
+    let editBtn = e.target.closest('.todo-edit');
+
+    if(e.target.name === 'todoCheckBox' && e.target.checked === false) {
+        myTodos[todoIndex].isDone = false;
+        storeTodos();
+    } else if(e.target.name === 'todoCheckBox' && e.target.checked === true) {
+        myTodos[todoIndex].isDone = true;
+        storeTodos();
+    }
+
+    if(deleteBtn) {
+        let index = myTodos.findIndex(element => element.id === parseInt(deleteBtn.parentNode.parentNode.parentNode.dataset.index));
+        deleteBtn.parentElement.parentElement.parentElement.remove();
+        myTodos.splice(index,1);
+        storeTodos();
+        console.log(myTodos);
+        console.log('deleted todo');
+    } else if (editBtn) {
+        let index = myTodos.findIndex(element => element.id === parseInt(editBtn.parentNode.parentNode.parentNode.dataset.index));
+        myTodos[index].editTodo();
+        console.log(myTodos);
+        console.log('edited todo');
+    }
+});
+
 function removeContent() {
     while (todoContent.firstChild) {
         todoContent.removeChild(todoContent.firstChild);
       }
 }
 
-(function defaultTodos() {
-    let checklist = [
-        new Checklist('eat',false),
-        new Checklist('code',false),
-        new Checklist('sleep',false),
-    ]
-    myTodos.push(new Todo('learn to code','personal','2021-07-10','lorem ipsum',checklist,false,Todo.idNum()));
-    myTodos[Todo.idNum()].createTodo();
-    Todo.incrementIdCount();
-})();
+// (function defaultTodos() {
+//     let checklist = [
+//         new Checklist('eat',false),
+//         new Checklist('code',false),
+//         new Checklist('sleep',false),
+//     ]
+//     myTodos.push(new Todo('learn to code','personal','2021-07-10','lorem ipsum',checklist,false,Todo.idNum()));
+//     myTodos[Todo.idNum()].createTodo();
+//     Todo.incrementIdCount();
+// })();
+
+function storeTodos() {
+    localStorage.setItem(`myTodos`, JSON.stringify(myTodos));
+}
+
+function getData() {
+    let storedTodos = localStorage.getItem('myTodos');
+    let parsedTodos = JSON.parse(storedTodos);
+
+    for (let todo of parsedTodos) {
+        let storedChecklist = []
+
+        todo.checklist.forEach(e => {
+            let storedChecklistItem = new Checklist(e.title,e.isDone);
+            storedChecklist.push(storedChecklistItem);
+        });
+
+        let storedTodo = new Todo(todo.title,todo.project,todo.date,todo.note,storedChecklist,todo.isDone,todo.id);
+        //we push locally stored todos back to the array because todo elements lose prototype when parsed
+        storedTodo.addToArray(myTodos);
+        storedTodo.createTodo();
+        Todo.incrementIdCount();
+    }    
+}
+
+if(!localStorage.getItem('myTodos')) {
+    storeTodos()
+} else {
+    getData();
+}
