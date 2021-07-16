@@ -145,8 +145,8 @@ function createChecklistInput(container) {
 function submitChecklist() {
     const checklistInputs = document.querySelectorAll('.checklist-input');
     let checklist = [];
-    checklistInputs.forEach(e => {
-        let item = newChecklistItem(e.value,false)
+    checklistInputs.forEach((e,i) => {
+        let item = newChecklistItem(e.value,false,i)
         return checklist.push(item);
     });
     return checklist;

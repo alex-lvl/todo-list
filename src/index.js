@@ -153,17 +153,20 @@ class Todo {
 }
 
 class Checklist  {
-    constructor(title,isDone) {
+    constructor(title,isDone,id) {
         this.title = title;
         this.isDone = isDone;
+        this.id = id;
     }
 
     createChecklistItem(container) {
         const checklistItem = document.createElement('div');
         checklistItem.className = 'checklist-item d-flex'
+        checklistItem.setAttribute('data-index', this.id);
 
         const checklistInput = document.createElement('input');
         checklistInput.type = 'checkbox';
+        checklistInput.name = 'checklistCheckbox'
         checklistInput.checked = this.isDone;
 
         const checklistTitle = document.createElement('p');
@@ -176,9 +179,8 @@ class Checklist  {
     }
 }
 
-function newChecklistItem(title,isDone) {
-    let item = new Checklist(title,isDone)
-    return item
+function newChecklistItem(title,isDone,id) {
+    return new Checklist(title,isDone,id)
 }
 
 function submitTodo(title,project,date,notes,checklist,isDone) {
@@ -221,15 +223,31 @@ linkTabs.forEach((e) => {
 })
 
 todoContent.addEventListener('click', (e) => {
-    let todoIndex = parseInt(e.target.parentNode.parentNode.dataset.index);
     let deleteBtn = e.target.closest('.todo-delete');
     let editBtn = e.target.closest('.todo-edit');
 
     if(e.target.name === 'todoCheckBox' && e.target.checked === false) {
+        let todoIndex = myTodos.findIndex(element => element.id === parseInt(e.target.parentNode.parentNode.dataset.index));
         myTodos[todoIndex].isDone = false;
+        console.log(myTodos);
         storeTodos();
     } else if(e.target.name === 'todoCheckBox' && e.target.checked === true) {
+        let todoIndex = myTodos.findIndex(element => element.id === parseInt(e.target.parentNode.parentNode.dataset.index));
         myTodos[todoIndex].isDone = true;
+        console.log(myTodos);
+        storeTodos();
+    }
+
+    if(e.target.name === 'checklistCheckbox' && e.target.checked === false) {
+        let checklistTodoIndex = myTodos.findIndex(element => element.id === parseInt(e.target.parentNode.parentNode.parentNode.parentNode.dataset.index));
+        let checklistItemIndex = myTodos[checklistTodoIndex].checklist.findIndex(el => el.id === parseInt(e.target.parentNode.dataset.index))
+        myTodos[checklistTodoIndex].checklist[checklistItemIndex].isDone = false;
+        storeTodos();
+    } else if(e.target.name === 'checklistCheckbox' && e.target.checked === true) {
+        let checklistTodoIndex = myTodos.findIndex(element => element.id === parseInt(e.target.parentNode.parentNode.parentNode.parentNode.dataset.index));
+        let checklistItemIndex = myTodos[checklistTodoIndex].checklist.findIndex(el => el.id === parseInt(e.target.parentNode.dataset.index));
+        myTodos[checklistTodoIndex].checklist[checklistItemIndex].isDone = true;
+        console.log(myTodos);
         storeTodos();
     }
 
@@ -273,20 +291,20 @@ function getData() {
     let storedTodos = localStorage.getItem('myTodos');
     let parsedTodos = JSON.parse(storedTodos);
 
-    for (let todo of parsedTodos) {
+    parsedTodos.forEach((e,i) => {
         let storedChecklist = []
 
-        todo.checklist.forEach(e => {
-            let storedChecklistItem = new Checklist(e.title,e.isDone);
+        e.checklist.forEach((el,ind) => {
+            let storedChecklistItem = new Checklist(el.title,el.isDone,ind);
             storedChecklist.push(storedChecklistItem);
         });
-
-        let storedTodo = new Todo(todo.title,todo.project,todo.date,todo.note,storedChecklist,todo.isDone,todo.id);
+        
+        let storedTodo = new Todo(e.title,e.project,e.date,e.note,storedChecklist,e.isDone,i);
         //we push locally stored todos back to the array because todo elements lose prototype when parsed
         storedTodo.addToArray(myTodos);
         storedTodo.createTodo();
         Todo.incrementIdCount();
-    }    
+    });
 }
 
 if(!localStorage.getItem('myTodos')) {

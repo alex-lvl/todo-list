@@ -25,26 +25,3 @@ function appendTodos() {
         e.createTodo();
     });
 }
-
-todoContent.addEventListener('click', (e) => {
-    let todoIndex = e.target.parentNode.parentNode.dataset.index;
-    let deleteBtn = e.target.closest('.todo-delete');
-    let editBtn = e.target.closest('.todo-edit');
-
-    if(e.target.name === 'todoCheckBox' && e.target.checked === false) {
-        myTodos[todoIndex].isDone = false;
-    } else if(e.target.name === 'todoCheckBox' && e.target.checked === true) {
-        myTodos[todoIndex].isDone = true;
-    }
-
-    if(deleteBtn) {
-        let index = myTodos.findIndex(element => element.id === parseInt(deleteBtn.parentNode.parentNode.parentNode.dataset.index));
-        deleteBtn.parentElement.parentElement.parentElement.remove();
-        myTodos.splice(index,1);
-        console.log(myTodos);
-        console.log('deleted todos');
-    } else if (editBtn) {
-        let index = myTodos.findIndex(element => element.id === parseInt(editBtn.parentNode.parentNode.parentNode.dataset.index));
-        myTodos[index].editTodo();
-    }
-});

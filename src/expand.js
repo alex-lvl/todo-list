@@ -1,7 +1,7 @@
 export {expandSideBar, expandTodo}
 import {myProjects} from './projects'
 
-const expandButton = document.querySelector('.navbar-brand');
+const expandButton = document.querySelector('.expand-btn');
 const sideBar = document.querySelector('aside');
 const logoContainer = document.querySelector('.logo-container');
 const logoName = document.querySelectorAll('.logo-name');
@@ -10,7 +10,6 @@ const navBar = document.querySelector('nav');
 const sideLinks = document.querySelector('.side-links');
 const projectTabs = document.querySelector('.side-projects');
 const sideProjectsHeader= document.querySelector('.side-projects-header');
-const newProjectBtn = document.querySelector('.side-projects-form-tab');
 const todoContent = document.querySelector('.content')
 
 function expandSideBar() {
@@ -21,7 +20,6 @@ function expandSideBar() {
         sideLinks.classList.toggle('side-links-expanded');
         projectTabs.classList.toggle('side-projects-expanded');
         sideProjectsHeader.classList.toggle('side-projects-expanded');
-        newProjectBtn.classList.toggle('side-projects-expanded')
         logoContainer.classList.toggle('logo-container-expanded');
         mainContent.classList.toggle('main-content-expanded');
         navBar.classList.toggle('nav-expanded');
@@ -60,6 +58,7 @@ function expandTodo() {
     });
 };
 
+//bug exists that does not delete all project forms !!!!!IMPORTANT!!!!!!!
 function removeExistingProjectForms() {
     let isSideBarExpanded = sideBar.classList.contains('side-bar-expanded');
     let projectList = [...projectTabs.children];
