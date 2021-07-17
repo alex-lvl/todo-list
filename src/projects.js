@@ -1,5 +1,5 @@
 export {activateProjectTabListeners}
-import { myTodos, removeContent } from "./index";
+import { myTodos, removeContent, storeTodos } from "./index";
 
 const sideBar = document.querySelector('aside');
 const projectHeader = document.querySelector('header');
@@ -29,6 +29,7 @@ function activateProjectTabListeners() {
         } else if (project) {
             removeContent();
             updateProjectHeader(index);
+            createDeleteBtn(index,project);
             findProjectTodo(myProjects[index]);
         }
     });
@@ -75,8 +76,40 @@ class Project {
         option.textContent = this.title;
         selectMenu.appendChild(option);
     }
+
+    deleteProject() {
+
+    }
 }
 
+function createDeleteBtn(index,projectElement) {
+    let deleteProjectBtn = document.createElement('button');
+    deleteProjectBtn.className = 'btn btn-outline-danger';
+    deleteProjectBtn.textContent = 'delete';
+    projectHeader.appendChild(deleteProjectBtn)
+
+    deleteProjectBtn.addEventListener('click', (e) => {
+        if(e) {
+            let indexes = []
+            for(let todo of myTodos) {
+                if(myProjects[index].title === todo.project) {
+                    indexes.push(myTodos.indexOf(todo))
+                }
+            }
+            for(let i of indexes.reverse()) {
+                console.log(myTodos.splice(i,1))
+            }            
+            deleteProjectBtn.remove();
+            projectElement.remove();
+            myProjects.splice(index,1);
+            removeContent();
+            storeProjects();
+            storeTodos();
+            console.log('deleted project');
+        }
+    });
+}
+ 
 function createProjectForm() {
     const project = new Project(undefined,undefined);
     myProjects.push(project);

@@ -12,7 +12,7 @@ const linkTabs = document.querySelectorAll('.link');
 const header = document.querySelector('header');
 const todoContent = document.querySelector('.content');
 let myTodos = [];
-export {myTodos,removeContent}
+export {myTodos,removeContent,storeTodos}
 
 (function activateEventListeners() {
     expandTodo();
@@ -298,7 +298,7 @@ function getData() {
             let storedChecklistItem = new Checklist(el.title,el.isDone,ind);
             storedChecklist.push(storedChecklistItem);
         });
-        
+
         let storedTodo = new Todo(e.title,e.project,e.date,e.note,storedChecklist,e.isDone,i);
         //we push locally stored todos back to the array because todo elements lose prototype when parsed
         storedTodo.addToArray(myTodos);
