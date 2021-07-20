@@ -1,13 +1,11 @@
-export {activateProjectTabListeners}
 import { myTodos, removeContent, storeTodos } from "./index";
+export { activateProjectTabListeners, myProjects };
 
 const sideBar = document.querySelector('aside');
 const projectHeader = document.querySelector('header');
 const projectFormTab = document.querySelector('.side-projects-form-tab');
-const projectTabs = document.querySelector('.side-projects')
-const todoContent = document.querySelector('.content');
-const myProjects = [];
-export {myProjects};
+const projectTabs = document.querySelector('.side-projects');
+let myProjects = [];
 
 function activateProjectTabListeners() {
     projectFormTab.addEventListener('click', () => {
@@ -16,7 +14,7 @@ function activateProjectTabListeners() {
         }
     });
     
-    projectTabs.addEventListener('click', e => {
+    projectTabs.addEventListener('click', (e) => {
         let project = e.target.closest('.project');
         let lis = [...projectTabs.children];
         let index = lis.indexOf(project);
@@ -30,7 +28,7 @@ function activateProjectTabListeners() {
             removeContent();
             updateProjectHeader(index);
             createDeleteBtn(index,project);
-            findProjectTodo(myProjects[index]);
+            displayProjectsTodos(myProjects[index]);
         }
     });
 }
@@ -54,31 +52,10 @@ class Project {
         container.appendChild(projectTitle);
     }
 
-    createProjectElements() {
-        const li = document.createElement('li')
-        li.className = 'project';
-        li.innerHTML = `
-        <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-circle list-vector" viewBox="0 0 16 16">
-            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-        </svg> `;
-
-        const projectTitle = document.createElement('span');
-        projectTitle.className = 'link-text';
-        projectTitle.textContent = this.title;
-    
-        li.appendChild(projectTitle);
-    
-        projectTabs.appendChild(li);
-    }
-
     createProjectOption(selectMenu) {
         const option = document.createElement('option');
         option.textContent = this.title;
         selectMenu.appendChild(option);
-    }
-
-    deleteProject() {
-
     }
 }
 
@@ -111,10 +88,11 @@ function createDeleteBtn(index,projectElement) {
 }
  
 function createProjectForm() {
+    //project is initialized and pushed immediately in order to adjust for multiple forms and place elements in the proper index of the array.
     const project = new Project(undefined,undefined);
     myProjects.push(project);
-    
-    const li = document.createElement('li')
+
+    const projectContainer = createProjectContainer();
 
     const titleInput = document.createElement('input');
     titleInput.className = 'project-form';
@@ -123,19 +101,14 @@ function createProjectForm() {
     titleInput.placeholder = 'name'
     titleInput.name = 'title';
 
-    li.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-x-circle cancel-project-icon" viewBox="0 0 16 16">
-        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
-    </svg>`;
-    li.appendChild(titleInput);
+    projectContainer.li.appendChild(titleInput);
+    projectTabs.appendChild(projectContainer.li);
 
-    projectTabs.appendChild(li);
-
-    titleInput.addEventListener('keypress', function(e) {
+    titleInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') {
             project.title = titleInput.value;
-            project.createProject(li);
-            li.className = 'project';
+            project.createProject(projectContainer.li);
+            projectContainer.li.className = 'project';
             storeProjects();
             console.log('submitted');
             console.log(myProjects);
@@ -153,6 +126,16 @@ function updateProjectHeader(i) {
     </h1>`;
 }
 
+function createProjectContainer() {
+    const li = document.createElement('li');
+    li.innerHTML = `
+    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-x-circle cancel-project-icon" viewBox="0 0 16 16">
+        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+    </svg>`;
+
+    return { li };
+}
 // (function addDefaultProjects() {
 //     let personalTodos = [];
 //     let workTodos = [];
@@ -169,7 +152,7 @@ function updateProjectHeader(i) {
 //     console.log(myProjects);
 // })();
 
-function findProjectTodo(project) {
+function displayProjectsTodos(project) {
     for(let todo of myTodos) {
         if (project.title === todo.project) {
             todo.createTodo();
@@ -182,13 +165,16 @@ function storeProjects() {
 }
 
 function getProjectData() {
-    let storedProjects = localStorage.getItem('myProjects');
-    let parsedProjects = JSON.parse(storedProjects);
+    const storedProjects = localStorage.getItem('myProjects');
+    const parsedProjects = JSON.parse(storedProjects);
 
     for (let project of parsedProjects) {
-        let storedProject = new Project(project.title,project.todos);
+        const storedProject = new Project(project.title,project.todos);
+        const projectContainer = createProjectContainer();
+        projectContainer.li.className = 'project';
         //we push locally stored projects back to the array because project elements lose prototype when parsed
-        storedProject.createProjectElements();
+        storedProject.createProject(projectContainer.li);
+        projectTabs.appendChild(projectContainer.li);
         myProjects.push(storedProject);
     }    
 }

@@ -1,8 +1,7 @@
-export {displayInbox} 
-import {myTodos} from './index'
+import { myTodos } from './index'
+export { displayInbox } 
 
 const inboxHeader = document.querySelector('header');
-const todoContent = document.querySelector('.content');
 
 function displayInbox() {
     updateInboxHeader();

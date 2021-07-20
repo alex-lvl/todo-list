@@ -1,5 +1,5 @@
-export {displayPresentTodos} 
-import {myTodos} from './index'
+export { displayPresentTodos } 
+import { myTodos } from './index'
 
 const todayHeader = document.querySelector('header');
 

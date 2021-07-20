@@ -1,18 +1,17 @@
 import 'bootstrap'
-import {expandTodo,expandSideBar} from './expand';
-import {displayForm,createFormElements,createChecklistInput} from './form';
-import {displayInbox} from './inbox'
-import {displayPresentTodos} from './today'
-import {displayWeekTodos} from './week'
-import {activateProjectTabListeners} from './projects'
-import { getDay,isThisWeek } from 'date-fns'
-export {submitTodo,submitEdit,newChecklistItem}
+import { expandTodo,expandSideBar } from './expand';
+import { displayForm, createFormElements, createChecklistInput } from './form';
+import { displayInbox } from './inbox'
+import { displayPresentTodos } from './today'
+import { displayWeekTodos } from './week'
+import { activateProjectTabListeners } from './projects'
+import { getDay, isThisWeek } from 'date-fns'
+export { submitTodo, submitEdit, newChecklistItem, myTodos, removeContent, storeTodos }
 
 const linkTabs = document.querySelectorAll('.link');
 const header = document.querySelector('header');
 const todoContent = document.querySelector('.content');
 let myTodos = [];
-export {myTodos,removeContent,storeTodos}
 
 (function activateEventListeners() {
     expandTodo();
@@ -30,6 +29,7 @@ class Todo {
     static idNum() {
         return this.idCount;
     }
+
     constructor(title,project,date,note,checklist,isDone,id) {
         this.title = title
         this.project = project
@@ -56,12 +56,14 @@ class Todo {
         todoCheckbox.type = 'checkbox';
         todoCheckbox.name = 'todoCheckBox';
         todoCheckbox.checked = this.isDone;
+
         const todoHeaderContainer = document.createElement('div');
         todoHeaderContainer.className = 'todo-header-container';
 
         const todoTitle = document.createElement('p');
         todoTitle.className = 'todo-title'
         todoTitle.textContent = this.title;
+
         const todoProject = document.createElement('p');
         todoProject.className = 'todo-project text-muted';
         todoProject.textContent = this.project;
@@ -91,7 +93,7 @@ class Todo {
         notes.textContent = this.note;
 
         const checklistContainer = document.createElement('div');
-        this.checklist.forEach(e => {
+        this.checklist.forEach((e) => {
             e.createChecklistItem(checklistContainer);
         });
 
@@ -115,7 +117,7 @@ class Todo {
     isTodoToday() {
         const today = new Date();
         //this code converts the dash (-) mark into forward slash (/) to fix date format
-        let date = new Date(this.date.replace(/-/g, '\/'));
+        const date = new Date(this.date.replace(/-/g, '\/'));
         return date.getDate() === today.getDate() &&
                date.getMonth() === today.getMonth() &&
                date.getFullYear() === today.getFullYear();
@@ -123,8 +125,8 @@ class Todo {
 
     isTodoThisWeek() {
         const today = new Date();
-        let date = new Date(this.date.replace(/-/g, '\/'));
-        let dayIndex = getDay(today);
+        const date = new Date(this.date.replace(/-/g, '\/'));
+        const dayIndex = getDay(today);
         return isThisWeek(date, { weekStartsOn : dayIndex });
     }
 
@@ -140,7 +142,7 @@ class Todo {
         </h1>`;
         let form = createFormElements(true,this.id);
         form.titleInput.value = this.title;
-        Array.from(form.projectMenu.children).forEach(option => {
+        Array.from(form.projectMenu.children).forEach((option) => {
             option.value === this.project ? option.selected = true : undefined;
         });
         form.dateInput.value = this.date;
@@ -192,7 +194,7 @@ function submitTodo(title,project,date,notes,checklist,isDone) {
 }
 
 function submitEdit(title,project,date,note,checklist,index) {
-    let existingTodo = myTodos[index]
+    const existingTodo = myTodos[index]
     existingTodo.title = title;
     existingTodo.project = project;
     existingTodo.date = date;
@@ -205,7 +207,7 @@ function submitEdit(title,project,date,note,checklist,index) {
 linkTabs.forEach((e) => {
     e.addEventListener('click', () => {
         removeContent();
-        switch(e) {
+        switch (e) {
             case linkTabs[0]:
                 displayForm();
                 break;
@@ -223,45 +225,43 @@ linkTabs.forEach((e) => {
 })
 
 todoContent.addEventListener('click', (e) => {
-    let deleteBtn = e.target.closest('.todo-delete');
-    let editBtn = e.target.closest('.todo-edit');
-
-    if(e.target.name === 'todoCheckBox' && e.target.checked === false) {
-        let todoIndex = myTodos.findIndex(element => element.id === parseInt(e.target.parentNode.parentNode.dataset.index));
+    if (e.target.name === 'todoCheckBox' && e.target.checked === false) {
+        const todoIndex = myTodos.findIndex(element => element.id === parseInt(e.target.parentNode.parentNode.dataset.index));
         myTodos[todoIndex].isDone = false;
-        console.log(myTodos);
         storeTodos();
-    } else if(e.target.name === 'todoCheckBox' && e.target.checked === true) {
-        let todoIndex = myTodos.findIndex(element => element.id === parseInt(e.target.parentNode.parentNode.dataset.index));
+    } 
+    else if (e.target.name === 'todoCheckBox' && e.target.checked === true) {
+        const todoIndex = myTodos.findIndex(element => element.id === parseInt(e.target.parentNode.parentNode.dataset.index));
         myTodos[todoIndex].isDone = true;
-        console.log(myTodos);
         storeTodos();
     }
 
-    if(e.target.name === 'checklistCheckbox' && e.target.checked === false) {
-        let checklistTodoIndex = myTodos.findIndex(element => element.id === parseInt(e.target.parentNode.parentNode.parentNode.parentNode.dataset.index));
-        let checklistItemIndex = myTodos[checklistTodoIndex].checklist.findIndex(el => el.id === parseInt(e.target.parentNode.dataset.index))
+    if (e.target.name === 'checklistCheckbox' && e.target.checked === false) {
+        const checklistTodoIndex = myTodos.findIndex(element => element.id === parseInt(e.target.parentNode.parentNode.parentNode.parentNode.dataset.index));
+        const checklistItemIndex = myTodos[checklistTodoIndex].checklist.findIndex(el => el.id === parseInt(e.target.parentNode.dataset.index))
         myTodos[checklistTodoIndex].checklist[checklistItemIndex].isDone = false;
         storeTodos();
-    } else if(e.target.name === 'checklistCheckbox' && e.target.checked === true) {
-        let checklistTodoIndex = myTodos.findIndex(element => element.id === parseInt(e.target.parentNode.parentNode.parentNode.parentNode.dataset.index));
-        let checklistItemIndex = myTodos[checklistTodoIndex].checklist.findIndex(el => el.id === parseInt(e.target.parentNode.dataset.index));
+    } 
+    else if (e.target.name === 'checklistCheckbox' && e.target.checked === true) {
+        const checklistTodoIndex = myTodos.findIndex(element => element.id === parseInt(e.target.parentNode.parentNode.parentNode.parentNode.dataset.index));
+        const checklistItemIndex = myTodos[checklistTodoIndex].checklist.findIndex(el => el.id === parseInt(e.target.parentNode.dataset.index));
         myTodos[checklistTodoIndex].checklist[checklistItemIndex].isDone = true;
-        console.log(myTodos);
         storeTodos();
     }
 
-    if(deleteBtn) {
-        let index = myTodos.findIndex(element => element.id === parseInt(deleteBtn.parentNode.parentNode.parentNode.dataset.index));
+    const deleteBtn = e.target.closest('.todo-delete');
+    const editBtn = e.target.closest('.todo-edit');
+
+    if (deleteBtn) {
+        const index = myTodos.findIndex(element => element.id === parseInt(deleteBtn.parentNode.parentNode.parentNode.dataset.index));
         deleteBtn.parentElement.parentElement.parentElement.remove();
         myTodos.splice(index,1);
         storeTodos();
-        console.log(myTodos);
         console.log('deleted todo');
-    } else if (editBtn) {
-        let index = myTodos.findIndex(element => element.id === parseInt(editBtn.parentNode.parentNode.parentNode.dataset.index));
+    } 
+    else if (editBtn) {
+        const index = myTodos.findIndex(element => element.id === parseInt(editBtn.parentNode.parentNode.parentNode.dataset.index));
         myTodos[index].editTodo();
-        console.log(myTodos);
         console.log('edited todo');
     }
 });
@@ -288,18 +288,17 @@ function storeTodos() {
 }
 
 function getData() {
-    let storedTodos = localStorage.getItem('myTodos');
-    let parsedTodos = JSON.parse(storedTodos);
+    const storedTodos = localStorage.getItem('myTodos');
+    const parsedTodos = JSON.parse(storedTodos);
 
     parsedTodos.forEach((e,i) => {
-        let storedChecklist = []
-
+        const storedChecklist = []
         e.checklist.forEach((el,ind) => {
-            let storedChecklistItem = new Checklist(el.title,el.isDone,ind);
+            const storedChecklistItem = new Checklist(el.title,el.isDone,ind);
             storedChecklist.push(storedChecklistItem);
         });
 
-        let storedTodo = new Todo(e.title,e.project,e.date,e.note,storedChecklist,e.isDone,i);
+        const storedTodo = new Todo(e.title,e.project,e.date,e.note,storedChecklist,e.isDone,i);
         //we push locally stored todos back to the array because todo elements lose prototype when parsed
         storedTodo.addToArray(myTodos);
         storedTodo.createTodo();

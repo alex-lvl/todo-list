@@ -1,5 +1,5 @@
-export {expandSideBar, expandTodo}
-import {myProjects} from './projects'
+export { expandSideBar, expandTodo }
+import { myProjects } from './projects'
 
 const expandButton = document.querySelector('.expand-btn');
 const sideBar = document.querySelector('aside');
@@ -13,7 +13,7 @@ const sideProjectsHeader= document.querySelector('.side-projects-header');
 const todoContent = document.querySelector('.content')
 
 function expandSideBar() {
-    expandButton.addEventListener('click', function() {
+    expandButton.addEventListener('click', () => {
         const sideBarText = document.querySelectorAll('.link-text');
         
         sideBar.classList.toggle('side-bar-expanded');
@@ -41,20 +41,23 @@ function expandSideBar() {
                 <path fill-rule="evenodd" d="M6 8a.5.5 0 0 0 .5.5h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L12.293 7.5H6.5A.5.5 0 0 0 6 8zm-2.5 7a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5z"/>
             </svg> `;
         }
+
         removeExistingProjectForms();
     });
 }
 
 function expandTodo() {
-    todoContent.addEventListener('click', function(e) {
+    todoContent.addEventListener('click', (e) => {
         let todoContainer = e.target.closest('.todo-container');
-        if(
+
+        if (
             e.target.classList.contains('todo-container') 
             || e.target.classList.contains('d-flex') 
             || e.target.classList.contains('todo-container-expanded')
         ) {
             todoContainer.children[1].classList.toggle('hide-element');
         }
+        
     });
 };
 

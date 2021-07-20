@@ -1,13 +1,13 @@
-export {displayForm,createFormElements,createChecklistInput};
-import {submitTodo,newChecklistItem, submitEdit} from './index'
-import {myProjects} from './projects'
+import { submitTodo, newChecklistItem, submitEdit } from './index'
+import { myProjects } from './projects'
+export { displayForm, createFormElements, createChecklistInput };
 
 const formHeader = document.querySelector('header');
 const content = document.querySelector('.content');
 
 function displayForm() {
     updateHeader();
-    createFormElements();
+    createFormElements(); 
 }
 
 function updateHeader() {
@@ -25,7 +25,7 @@ function createFormElements(isEditing,index) {
     todoForm.className = 'todo-form'
 
     const titleInputContainer = document.createElement('p');
-    const titleLabel =document.createElement('label');
+    const titleLabel = document.createElement('label');
     const titleInput = document.createElement('input');
     titleLabel.for = 'title';
     titleLabel.textContent = 'title';
@@ -42,31 +42,29 @@ function createFormElements(isEditing,index) {
     projectLabel.innerText = 'select a project';
     projectMenu.className = 'form-select';
     projectMenu.name = 'project';
-
     projectOption.selected = true;
     projectOption.textContent = '';
     projectMenu.appendChild(projectOption)
     myProjects.forEach(e => {
         e.createProjectOption(projectMenu);
     });
-
     projectMenuContainer.appendChild(projectLabel);
     projectMenuContainer.appendChild(projectMenu);
 
     const dateContainer = document.createElement('p');
-    const dateLabel =document.createElement('label');
+    const dateLabel = document.createElement('label');
     const dateInput = document.createElement('input');
-    dateLabel.innerText = 'date'
+    dateLabel.innerText = 'date';
     dateInput.type = 'date';
     dateInput.name = 'date';
     dateContainer.appendChild(dateLabel);
     dateContainer.appendChild(dateInput);
 
     const notesContainer = document.createElement('p');
-    const notesLabel =document.createElement('label');
+    const notesLabel = document.createElement('label');
+    notesLabel.innerText = 'notes';
     const notesInput = document.createElement('textarea');
-    notesLabel.innerText = 'notes'
-    notesInput.className = 'form-control'
+    notesInput.className = 'form-control';
     notesInput.name = 'notes';
     notesInput.cols = 30;
     notesInput.rows = 3;
@@ -77,7 +75,8 @@ function createFormElements(isEditing,index) {
     checklistContainer.className = 'row row-cols-lg-3 row-cols-md-2 row-cols-sm-12';
     checklistContainer.addEventListener('click', (e) => {
         const deleteIcon = e.target.closest('svg');
-        if(deleteIcon) {
+
+        if (deleteIcon) {
             deleteIcon.parentElement.parentElement.remove();
         }
     });
@@ -89,7 +88,8 @@ function createFormElements(isEditing,index) {
     checklistBtn.innerText = 'add checklist';
     checklistBtnContainer.appendChild(checklistBtn);
     checklistBtn.addEventListener('click', () => {
-        createChecklistInput(checklistContainer);
+        const { checklistInputContainer } = createChecklistInput();
+        checklistContainer.appendChild(checklistInputContainer)
     });
 
     const submitBtnContainer = document.createElement('div');
@@ -99,7 +99,6 @@ function createFormElements(isEditing,index) {
     submitBtn.type = 'button';
     submitBtn.textContent = 'submit';
     submitBtnContainer.appendChild(submitBtn);
-
     submitBtn.addEventListener('click', () => {
         if(isEditing) {
             submitEdit(titleInput.value,projectMenu.value,dateInput.value,notesInput.value,submitChecklist(),index)
@@ -117,12 +116,12 @@ function createFormElements(isEditing,index) {
     todoForm.appendChild(submitBtnContainer);
     content.appendChild(todoForm);
 
-    return {titleInput,projectMenu,dateInput,notesInput,checklistContainer}
+    return { titleInput, projectMenu, dateInput, notesInput, checklistContainer }
 }
 
-function createChecklistInput(container) {
-    const checklistItem = document.createElement('div');
-    checklistItem.className = 'mb-2'
+function createChecklistInput() {
+    const checklistInputContainer = document.createElement('div');
+    checklistInputContainer.className = 'mb-2'
 
     const checklistTitle = document.createElement('label');
     checklistTitle.innerHTML = `
@@ -135,20 +134,21 @@ function createChecklistInput(container) {
     checklistInput.type = 'text';
     checklistInput.placeholder = 'checklist';
 
-    checklistItem.appendChild(checklistTitle);
-    checklistItem.appendChild(checklistInput);
-    container.appendChild(checklistItem);
+    checklistInputContainer.appendChild(checklistTitle);
+    checklistInputContainer.appendChild(checklistInput);
 
-    return {checklistInput}
+    return { checklistInput, checklistInputContainer }
 }
 
 function submitChecklist() {
     const checklistInputs = document.querySelectorAll('.checklist-input');
     let checklist = [];
+
     checklistInputs.forEach((e,i) => {
         let item = newChecklistItem(e.value,false,i)
         return checklist.push(item);
     });
+    
     return checklist;
 }
  
