@@ -1,14 +1,39 @@
-#btn-expand, .cancel-project-icon, .calender-icon, #pencil-icon, .project-icon, .inbox-icon, .list-vector {
+.cancel-project-icon, .calender-icon, #pencil-icon, .project-icon, .inbox-icon, .list-vector, #btn-expand {
   height: 1em;
   width: 1em;
 }
 
-.hide-text {
-  display: none;
+a {
+  text-decoration: none;
 }
 
-.navbar-toggler {
-  display: none;
+aside {
+  position: absolute;
+  height: 100%;
+  width: 60px;
+  background-color: #4723d9;
+  font-size: 0.95rem;
+  transition: all 0.5s;
+}
+
+nav {
+  margin-left: 60px;
+  transition: all 0.5s;
+}
+
+main {
+  margin-left: 60px;
+  padding: 2em 3em;
+  transition: all 0.5s;
+}
+
+#btn-expand {
+  fill: rgba(0, 0, 0, 0.675);
+  transition: all 0.5s;
+}
+
+#btn-expand:hover {
+  fill: black;
 }
 
 .logo-container {
@@ -89,30 +114,6 @@
 .link-text {
   color: rgba(255, 255, 255, 0.6);
   margin-left: 0.9rem;
-  transition: all 0.5s;
-}
-
-a {
-  text-decoration: none;
-}
-
-aside {
-  position: absolute;
-  height: 100%;
-  width: 60px;
-  background-color: #4723d9;
-  font-size: 0.95rem;
-  transition: all 0.5s;
-}
-
-nav {
-  margin-left: 60px;
-  transition: all 0.5s;
-}
-
-main {
-  margin-left: 60px;
-  padding: 2em 3em;
   transition: all 0.5s;
 }
 
@@ -231,13 +232,12 @@ main {
   padding: 0 1px;
 }
 
-#btn-expand {
-  fill: rgba(0, 0, 0, 0.675);
-  transition: all 0.5s;
+.hide-text {
+  display: none;
 }
 
-#btn-expand:hover {
-  fill: black;
+.navbar-toggler {
+  display: none;
 }
 
 @media (max-width: 767.98px) {
