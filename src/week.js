@@ -1,5 +1,5 @@
-export { displayWeekTodos } 
 import { myTodos } from './index'
+export { displayWeekTodos } 
 
 const weekHeader = document.querySelector('header');
 

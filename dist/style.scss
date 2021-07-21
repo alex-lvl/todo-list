@@ -11,12 +11,39 @@ $purple-color: #4723d9;
     width: 1em;
 }
 
-.hide-text {
-    display: none;
+a {
+    text-decoration: none;
 }
 
-.navbar-toggler {
-    display: none;
+aside {
+    position: absolute;
+    height: 100%;
+    width: $body-margin;
+
+    background-color: $purple-color;
+    font-size: .95rem;
+    transition: all .5s;
+}
+
+nav {
+    margin-left: $body-margin;
+    transition: all .5s;
+}
+
+main {
+    margin-left: $body-margin;
+    padding: 2em 3em;
+    transition: all .5s;
+}
+
+#btn-expand {
+    @extend %icon-size;
+    fill: rgba(0, 0, 0, 0.675);
+    transition: all .5s;
+}
+
+#btn-expand:hover {
+    fill: black;
 }
 
 .logo-container {
@@ -105,31 +132,6 @@ $purple-color: #4723d9;
 .link-text {
     color: $white-faded;
     margin-left: $side-text-margin;
-    transition: all .5s;
-}
-
-a {
-    text-decoration: none;
-}
-
-aside {
-    position: absolute;
-    height: 100%;
-    width: $body-margin;
-
-    background-color: $purple-color;
-    font-size: .95rem;
-    transition: all .5s;
-}
-
-nav {
-    margin-left: $body-margin;
-    transition: all .5s;
-}
-
-main {
-    margin-left: $body-margin;
-    padding: 2em 3em;
     transition: all .5s;
 }
 
@@ -267,14 +269,12 @@ main {
     padding: 0 1px;
 }
 
-#btn-expand {
-    @extend %icon-size;
-    fill: rgba(0, 0, 0, 0.675);
-    transition: all .5s;
+.hide-text {
+    display: none;
 }
 
-#btn-expand:hover {
-    fill: black;
+.navbar-toggler {
+    display: none;
 }
 
 @media (max-width: 767.98px) {

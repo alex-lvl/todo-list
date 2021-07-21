@@ -44,19 +44,24 @@ class Todo {
         arr.push(this);
     }
 
-    createTodo() {
+    createTodoContainer() {
         const todoContainer = document.createElement('div');
         todoContainer.className = 'todo-container';
         todoContainer.setAttribute('data-index', this.id);
 
-        const todo = document.createElement('div');
-        todo.className = 'd-flex';
+        return { todoContainer }
+    }
 
+    createTodoCheckbox() {
         const todoCheckbox = document.createElement('input');
         todoCheckbox.type = 'checkbox';
         todoCheckbox.name = 'todoCheckBox';
         todoCheckbox.checked = this.isDone;
 
+        return { todoCheckbox }
+    }
+
+    createTodoHeader() {
         const todoHeaderContainer = document.createElement('div');
         todoHeaderContainer.className = 'todo-header-container';
 
@@ -71,32 +76,53 @@ class Todo {
         todoHeaderContainer.appendChild(todoTitle);
         todoHeaderContainer.appendChild(todoProject);
 
+        return { todoHeaderContainer } 
+    }
+
+    createTodoDate() {
         const date = document.createElement('time');
         date.className = 'todo-date ms-auto'
         date.dateTime = this.date;
         date.textContent = this.date;
 
+        return { date }
+    }
+
+    createTodo() {
+        const { todoCheckbox } = this.createTodoCheckbox();
+        const { todoHeaderContainer } = this.createTodoHeader();
+        const { date } = this.createTodoDate();
+
+        const todo = document.createElement('div');
+        todo.className = 'd-flex';
         todo.appendChild(todoCheckbox);
         todo.appendChild(todoHeaderContainer);
         todo.appendChild(date);
+
+        const { todoContainer } = this.createTodoContainer();
         todoContainer.appendChild(todo);
         todoContainer.appendChild(this.createExpandedTodo())
         todoContent.appendChild(todoContainer);
     }
 
-    createExpandedTodo() {
-        const expandedTodoContainer = document.createElement('div');
-        expandedTodoContainer.className = 'todo-container-expanded hide-element';
-
+    createTodoNotes() {
         const notes = document.createElement('p');
         notes.className = 'todo-notes';
         notes.textContent = this.note;
 
+        return { notes }
+    }
+    
+    createTodoChecklist() {
         const checklistContainer = document.createElement('div');
         this.checklist.forEach((e) => {
             e.createChecklistItem(checklistContainer);
         });
 
+        return { checklistContainer }
+    }
+
+    createTodoIcons() {
         const iconsContainer = document.createElement('div');
         iconsContainer.className = 'todo-icons-container d-flex justify-content-end'
         iconsContainer.innerHTML = `
@@ -108,15 +134,27 @@ class Todo {
             <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
         </svg> `;
 
+        return { iconsContainer }
+    }
+
+    createExpandedTodo() {
+        const expandedTodoContainer = document.createElement('div');
+        expandedTodoContainer.className = 'todo-container-expanded hide-element';
+
+        const { notes } = this.createTodoNotes();
+        const { checklistContainer } = this.createTodoChecklist();
+        const { iconsContainer } = this.createTodoIcons();
+
         expandedTodoContainer.appendChild(notes);
         expandedTodoContainer.appendChild(checklistContainer);
         expandedTodoContainer.appendChild(iconsContainer);
+
         return expandedTodoContainer;
     }
 
     isTodoToday() {
         const today = new Date();
-        //this code converts the dash (-) mark into forward slash (/) to fix date format
+        //this code converts the dash mark (-) into forward slash (/) to fix the date's odd format
         const date = new Date(this.date.replace(/-/g, '\/'));
         return date.getDate() === today.getDate() &&
                date.getMonth() === today.getMonth() &&
