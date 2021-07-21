@@ -1,5 +1,5 @@
-export { expandSideBar, expandTodo }
 import { myProjects } from './projects'
+export { expandSideBar, expandTodo }
 
 const expandButton = document.querySelector('.expand-btn');
 const sideBar = document.querySelector('aside');
@@ -57,23 +57,24 @@ function expandTodo() {
         ) {
             todoContainer.children[1].classList.toggle('hide-element');
         }
-        
     });
 };
 
-//bug exists that does not delete all project forms !!!!!IMPORTANT!!!!!!!
 function removeExistingProjectForms() {
-    let isSideBarExpanded = sideBar.classList.contains('side-bar-expanded');
+    const isSideBarExpanded = sideBar.classList.contains('side-bar-expanded');
     let projectList = [...projectTabs.children];
 
     if(!isSideBarExpanded) {
-        for(let i = 0; i < myProjects.length; i++) {
-            if(!projectList[i].classList.contains('project')) {
-                projectList[i].remove()
-                myProjects.splice(i,1);
-                console.log(myProjects);
-            } 
-            projectList = [...projectTabs.children];
+        let projectFormIndexes = []
+        for(let project of projectList) {
+            if(!project.classList.contains('project')) {
+                projectFormIndexes.push(projectList.indexOf(project));
+            }
+        }
+        for(let index of projectFormIndexes.reverse()) {
+            projectList[index].remove()
+            console.log(myProjects.splice(index,1));
+            console.log(myProjects);
         }
     }
 }
