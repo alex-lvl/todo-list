@@ -1,3 +1,4 @@
+import { Collapse } from 'bootstrap';
 import { myProjects } from './projects'
 export { expandSideBar, expandTodo }
 
@@ -30,7 +31,7 @@ function expandSideBar() {
             e.classList.toggle('hide-text');
         });
 
-        if(sideBar.classList.contains('side-bar-expanded')) {
+        if (sideBar.classList.contains('side-bar-expanded')) {
             expandButton.innerHTML = `
             <svg xmlns="http://www.w3.org/2000/svg" id="btn-expand" fill="currentColor" class="bi bi-arrow-bar-left" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M12.5 15a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5zM10 8a.5.5 0 0 1-.5.5H3.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L3.707 7.5H9.5a.5.5 0 0 1 .5.5z"/>
@@ -41,7 +42,6 @@ function expandSideBar() {
                 <path fill-rule="evenodd" d="M6 8a.5.5 0 0 0 .5.5h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L12.293 7.5H6.5A.5.5 0 0 0 6 8zm-2.5 7a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5z"/>
             </svg> `;
         }
-
         removeExistingProjectForms();
     });
 }
@@ -64,17 +64,29 @@ function removeExistingProjectForms() {
     const isSideBarExpanded = sideBar.classList.contains('side-bar-expanded');
     let projectList = [...projectTabs.children];
 
-    if(!isSideBarExpanded) {
+    if (!isSideBarExpanded) {
         let projectFormIndexes = []
-        for(let project of projectList) {
-            if(!project.classList.contains('project')) {
+        for (let project of projectList) {
+            if (!project.classList.contains('project')) {
                 projectFormIndexes.push(projectList.indexOf(project));
             }
         }
-        for(let index of projectFormIndexes.reverse()) {
+        for (let index of projectFormIndexes.reverse()) {
             projectList[index].remove()
             console.log(myProjects.splice(index,1));
             console.log(myProjects);
         }
     }
+}
+
+function toggleCollapse() {
+    var collapseElementList = [].slice.call(document.querySelectorAll('.collapse'))
+    var collapseList = collapseElementList.map(function (collapseEl) {
+      return new Collapse(collapseEl, {
+          toggle: true
+      })
+    })   
+    console.log(collapseElementList)
+    console.log(Collapse) 
+    console.log(collapseList);
 }

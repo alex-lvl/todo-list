@@ -68,12 +68,12 @@ function createDeleteBtn(index,projectElement) {
     deleteProjectBtn.addEventListener('click', (e) => {
         if(e) {
             let indexes = []
-            for(let todo of myTodos) {
-                if(myProjects[index].title === todo.project) {
+            for (let todo of myTodos) {
+                if (myProjects[index].title === todo.project) {
                     indexes.push(myTodos.indexOf(todo))
                 }
             }
-            for(let i of indexes.reverse()) {
+            for (let i of indexes.reverse()) {
                 console.log(myTodos.splice(i,1))
             }            
             deleteProjectBtn.remove();
