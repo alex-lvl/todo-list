@@ -169,13 +169,15 @@ function getProjectData() {
     const parsedProjects = JSON.parse(storedProjects);
 
     for (let project of parsedProjects) {
-        const storedProject = new Project(project.title,project.todos);
-        const projectContainer = createProjectContainer();
-        projectContainer.li.className = 'project';
-        //we push locally stored projects back to the array because project elements lose prototype when parsed
-        storedProject.createProject(projectContainer.li);
-        projectTabs.appendChild(projectContainer.li);
-        myProjects.push(storedProject);
+        if(project.title !== undefined) {
+            const storedProject = new Project(project.title,project.todos);
+            const projectContainer = createProjectContainer();
+            projectContainer.li.className = 'project';
+            //we push locally stored projects back to the array because project elements lose prototype when parsed
+            storedProject.createProject(projectContainer.li);
+            projectTabs.appendChild(projectContainer.li);
+            myProjects.push(storedProject);
+        }
     }    
 }
 
