@@ -1,6 +1,6 @@
 import { submitTodo, newChecklistItem, submitEdit } from './index'
 import { myProjects } from './projects'
-export { displayForm, createFormElements, createChecklistInput };
+export { displayForm, createFormElements, createChecklistInput }
 
 const formHeader = document.querySelector('header');
 const content = document.querySelector('.content');
@@ -24,73 +24,11 @@ function createFormElements(isEditing,index) {
     const todoForm = document.createElement('form');
     todoForm.className = 'todo-form'
 
-    const titleInputContainer = document.createElement('p');
-    const titleLabel = document.createElement('label');
-    const titleInput = document.createElement('input');
-    titleLabel.for = 'title';
-    titleLabel.textContent = 'title';
-    titleInput.className = 'form-control';
-    titleInput.type = 'text';
-    titleInput.name = 'title';
-    titleInputContainer.appendChild(titleLabel);
-    titleInputContainer.appendChild(titleInput);
-
-    const projectMenuContainer = document.createElement('p');
-    const projectLabel = document.createElement('label');
-    const projectMenu = document.createElement('select');
-    const projectOption = document.createElement('option');
-    projectLabel.innerText = 'select a project';
-    projectMenu.className = 'form-select';
-    projectMenu.name = 'project';
-    projectOption.selected = true;
-    projectOption.textContent = '';
-    projectMenu.appendChild(projectOption)
-    myProjects.forEach(e => {
-        e.createProjectOption(projectMenu);
-    });
-    projectMenuContainer.appendChild(projectLabel);
-    projectMenuContainer.appendChild(projectMenu);
-
-    const dateContainer = document.createElement('p');
-    const dateLabel = document.createElement('label');
-    const dateInput = document.createElement('input');
-    dateLabel.innerText = 'date';
-    dateInput.type = 'date';
-    dateInput.name = 'date';
-    dateContainer.appendChild(dateLabel);
-    dateContainer.appendChild(dateInput);
-
-    const notesContainer = document.createElement('p');
-    const notesLabel = document.createElement('label');
-    notesLabel.innerText = 'notes';
-    const notesInput = document.createElement('textarea');
-    notesInput.className = 'form-control';
-    notesInput.name = 'notes';
-    notesInput.cols = 30;
-    notesInput.rows = 3;
-    notesContainer.appendChild(notesLabel);
-    notesContainer.appendChild(notesInput);
-
-    const checklistContainer = document.createElement('div');
-    checklistContainer.className = 'row row-cols-lg-3 row-cols-md-2 row-cols-sm-12';
-    checklistContainer.addEventListener('click', (e) => {
-        const deleteIcon = e.target.closest('svg');
-
-        if (deleteIcon) {
-            deleteIcon.parentElement.parentElement.remove();
-        }
-    });
-
-    const checklistBtnContainer = document.createElement('p');
-    const checklistBtn = document.createElement('button');
-    checklistBtn.type = 'button';
-    checklistBtn.className = 'btn btn-primary btn-sm checklist-btn';
-    checklistBtn.innerText = 'add checklist';
-    checklistBtnContainer.appendChild(checklistBtn);
-    checklistBtn.addEventListener('click', () => {
-        const { checklistInputContainer } = createChecklistInput();
-        checklistContainer.appendChild(checklistInputContainer)
-    });
+    const { titleInputContainer, titleInput } = createTitleInput();
+    const { projectMenuContainer, projectMenu } = createProjectMenu();
+    const { dateContainer, dateInput } = createDateInput();
+    const { notesContainer, notesInput } = createNotesInput();
+    const { checklistContainer, checklistBtnContainer } = createChecklistForm();
 
     const submitBtnContainer = document.createElement('div');
     const submitBtn = document.createElement('button');
@@ -117,6 +55,93 @@ function createFormElements(isEditing,index) {
     content.appendChild(todoForm);
 
     return { titleInput, projectMenu, dateInput, notesInput, checklistContainer }
+}
+
+function createTitleInput() {
+    const titleInputContainer = document.createElement('p');
+    const titleLabel = document.createElement('label');
+    const titleInput = document.createElement('input');
+    titleLabel.for = 'title';
+    titleLabel.textContent = 'title';
+    titleInput.className = 'form-control';
+    titleInput.type = 'text';
+    titleInput.name = 'title';
+    titleInputContainer.appendChild(titleLabel);
+    titleInputContainer.appendChild(titleInput);
+
+    return { titleInputContainer, titleInput }
+}
+
+function createProjectMenu() {
+    const projectMenuContainer = document.createElement('p');
+    const projectLabel = document.createElement('label');
+    const projectMenu = document.createElement('select');
+    const projectOption = document.createElement('option');
+    projectLabel.innerText = 'select a project';
+    projectMenu.className = 'form-select';
+    projectMenu.name = 'project';
+    projectOption.selected = true;
+    projectOption.textContent = '';
+    projectMenu.appendChild(projectOption)
+    myProjects.forEach((e) => {
+        e.createProjectOption(projectMenu);
+    });
+    projectMenuContainer.appendChild(projectLabel);
+    projectMenuContainer.appendChild(projectMenu);
+
+    return { projectMenuContainer, projectMenu }
+}
+
+function createDateInput() {
+    const dateContainer = document.createElement('p');
+    const dateLabel = document.createElement('label');
+    const dateInput = document.createElement('input');
+    dateLabel.innerText = 'date';
+    dateInput.type = 'date';
+    dateInput.name = 'date';
+    dateContainer.appendChild(dateLabel);
+    dateContainer.appendChild(dateInput);
+
+    return { dateContainer, dateInput }
+}
+
+function createNotesInput() {
+    const notesContainer = document.createElement('p');
+    const notesLabel = document.createElement('label');
+    const notesInput = document.createElement('textarea');
+    notesLabel.innerText = 'notes';
+    notesInput.className = 'form-control';
+    notesInput.name = 'notes';
+    notesInput.cols = 30;
+    notesInput.rows = 3;
+    notesContainer.appendChild(notesLabel);
+    notesContainer.appendChild(notesInput);
+
+    return { notesContainer, notesInput }
+}
+
+function createChecklistForm() {
+    const checklistContainer = document.createElement('div');
+    checklistContainer.className = 'row row-cols-lg-3 row-cols-md-2 row-cols-sm-12';
+    checklistContainer.addEventListener('click', (e) => {
+        const deleteIcon = e.target.closest('svg');
+        if (deleteIcon) {
+            deleteIcon.parentElement.parentElement.remove();
+        }
+    });
+
+    const checklistBtnContainer = document.createElement('p');
+    const checklistBtn = document.createElement('button');
+    checklistBtn.type = 'button';
+    checklistBtn.className = 'btn btn-primary btn-sm checklist-btn';
+    checklistBtn.innerText = 'add checklist';
+    checklistBtnContainer.appendChild(checklistBtn);
+    checklistBtn.addEventListener('click', () => {
+        const { checklistInputContainer } = createChecklistInput();
+        checklistContainer.appendChild(checklistInputContainer)
+    });
+
+    return { checklistContainer, checklistBtnContainer }
 }
 
 function createChecklistInput() {

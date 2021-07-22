@@ -174,8 +174,10 @@ class Todo {
         form.dateInput.value = this.date;
         form.notesInput.value = this.note;
         this.checklist.forEach((e) => {
-            let input = createChecklistInput(form.checklistContainer);
-            input.checklistInput.value = e.title;
+            // let input = createChecklistInput(form.checklistContainer);
+            const { checklistInputContainer, checklistInput } = createChecklistInput();
+            form.checklistContainer.appendChild(checklistInputContainer)
+            checklistInput.value = e.title;
         });
     }
 }
