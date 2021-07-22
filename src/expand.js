@@ -1,4 +1,4 @@
-import { Collapse } from 'bootstrap';
+import { Collapse } from 'bootstrap'
 import { myProjects } from './projects'
 export { expandSideBar, expandTodo }
 
@@ -11,7 +11,7 @@ const navBar = document.querySelector('nav');
 const sideLinks = document.querySelector('.side-links');
 const projectTabs = document.querySelector('.side-projects');
 const sideProjectsHeader= document.querySelector('.side-projects-header');
-const todoContent = document.querySelector('.content')
+const todoContent = document.querySelector('.content');
 
 function expandSideBar() {
     expandButton.addEventListener('click', () => {

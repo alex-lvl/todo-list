@@ -1,5 +1,5 @@
-import { myTodos } from './index'
-export { displayInbox } 
+import { myTodos } from './todo';
+export { displayInbox }
 
 const inboxHeader = document.querySelector('header');
 

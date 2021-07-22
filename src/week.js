@@ -1,4 +1,4 @@
-import { myTodos } from './index'
+import { myTodos } from './todo'
 export { displayWeekTodos } 
 
 const weekHeader = document.querySelector('header');

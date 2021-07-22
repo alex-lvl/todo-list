@@ -1,5 +1,6 @@
-import { myTodos, removeContent, storeTodos } from "./index";
-export { activateProjectTabListeners, myProjects };
+import { removeContent, storeTodos } from "./index"
+import { myTodos } from "./todo"
+export { activateProjectTabListeners, myProjects }
 
 const sideBar = document.querySelector('aside');
 const projectHeader = document.querySelector('header');
