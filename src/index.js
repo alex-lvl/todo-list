@@ -1,4 +1,5 @@
 import 'bootstrap'
+import './style.scss';
 import { Todo, Checklist, myTodos } from './todo'
 import { expandTodo,expandSideBar } from './expand'
 import { displayForm} from './form'
