@@ -1,5 +1,6 @@
 import 'bootstrap'
 import './style.scss';
+import logoImage from './images/todo-list-logo3.png'
 import { Todo, Checklist, myTodos } from './todo'
 import { expandTodo,expandSideBar } from './expand'
 import { displayForm} from './form'
@@ -11,6 +12,8 @@ export { submitTodo, submitEdit, newChecklistItem, removeContent, storeTodos }
 
 const linkTabs = document.querySelectorAll('.link');
 const todoContent = document.querySelector('.content');
+const logo = document.querySelector('.logo');
+logo.src = logoImage;
 
 (function activateEventListeners() {
     expandTodo();

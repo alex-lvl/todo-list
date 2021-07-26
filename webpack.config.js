@@ -31,6 +31,15 @@ module.exports = {
           "sass-loader",
         ],
       },
+      {
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        use: [{
+          loader: 'url-loader',
+          options: { 
+              name: 'images/[hash]-[name].[ext]'
+          } 
+        }]
+      },
     ],
   },
 };
