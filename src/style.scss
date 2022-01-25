@@ -39,6 +39,7 @@ main {
 #btn-expand {
     @extend %icon-size;
     fill: rgba(0, 0, 0, 0.675);
+    cursor: pointer;
     transition: all .5s;
 }
 
@@ -305,3 +306,64 @@ main {
         margin: 0 !important;
     }
 }
+
+#user-container {
+  display: flex;
+  flex-direction: row;
+  top: 22px;
+  width: 100%;
+  right: 0;
+  padding-left: 10px;
+  justify-content: flex-start;
+  padding-right: 10px;
+  color: white;
+  cursor: pointer;
+}
+
+#user-pic {
+  top: -3px;
+  position: relative;
+  display: inline-block;
+  // background-image: url('/images/profile_placeholder.png');
+  background-repeat: no-repeat;
+  width: 33px;
+  height: 33px;
+  background-size: 33px;
+  border-radius: 20px;
+}
+
+#user-container #user-name {
+  font-size: 16px;
+  line-height: 36px;
+  font-weight: 400;
+  // padding-right: 10px;
+  // padding-left: 20px;
+}
+
+.dropdown-hover {
+  display: flex;
+  flex-direction: row;
+}
+
+.sign-in-out-btn {
+  min-height: 50px;
+  max-width: 175px;
+  background: none;
+  color: white;
+  text-align: center;
+  border: 1px solid white;
+  border-radius: 5px;
+}
+
+#sign-out {
+  color: black;
+}
+
+.sign-in-out-container {
+  text-align: center;
+}
+
+.dropdown-menu-visible {
+  display: block;
+}
+

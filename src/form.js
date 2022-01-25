@@ -1,5 +1,6 @@
 import { submitTodo, newChecklistItem, submitEdit } from './index'
 import { myProjects } from './projects'
+import { myTodos } from './todo';
 export { displayForm, createFormElements, createChecklistInput }
 
 const formHeader = document.querySelector('header');
@@ -39,6 +40,7 @@ function createFormElements(isEditing,index) {
     submitBtnContainer.appendChild(submitBtn);
     submitBtn.addEventListener('click', () => {
         if(isEditing) {
+            console.log(myTodos,'on button click');
             submitEdit(titleInput.value,projectMenu.value,dateInput.value,notesInput.value,submitChecklist(),index)
         } else {
             submitTodo(titleInput.value,projectMenu.value,dateInput.value,notesInput.value,submitChecklist(),false);
@@ -168,8 +170,10 @@ function createChecklistInput() {
 function submitChecklist() {
     const checklistInputs = document.querySelectorAll('.checklist-input');
     let checklist = [];
+    console.log(myTodos, 'this is from submitting checklist')
 
     checklistInputs.forEach((e,i) => {
+      //checklist are given false isDone.
         let item = newChecklistItem(e.value,false,i)
         return checklist.push(item);
     });
